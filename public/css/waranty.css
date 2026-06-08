@@ -1,0 +1,30 @@
+body{font-family:sans-serif;font-size:14px}
+.nav-dark{background:#111}
+.nav-dark .nav-link{color:rgba(255,255,255,.8)!important;font-size:.8rem;text-transform:uppercase;letter-spacing:.05em}
+.hero{background:#111;min-height:280px;position:relative;overflow:hidden}
+.hero img{position:absolute;right:0;top:0;height:100%;width:60%;object-fit:cover;opacity:.5}
+.hero-text{position:relative;z-index:2;padding:3rem}
+.hero-text h1{font-size:3rem;font-weight:800;color:#fff}
+.hero-text p{color:rgba(255,255,255,.7);max-width:380px}
+.w-card{border:1px solid #ddd;border-radius:6px;padding:1.5rem;text-align:center;height:100%}
+.w-card .icon{font-size:2rem;color:#1c69d4;margin-bottom:.75rem}
+.w-card .label{font-size:.75rem;color:#666;margin-bottom:.25rem}
+.w-card .dur{font-size:1.2rem;font-weight:700;margin-bottom:.5rem}
+.w-card p{font-size:.82rem;color:#555;margin:0}
+.check-li{list-style:none;padding:0}
+.check-li li{padding:.4rem 0;border-bottom:1px solid #eee;font-size:.88rem}
+.check-li li:last-child{border:none}
+.x-li{list-style:none;padding:0}
+.x-li li{padding:.35rem 0;font-size:.88rem}
+.keep-card{background:#eef4ff;border:1px solid #c5d9f7;border-radius:6px;padding:1.5rem}
+.vin-section{background:#111;padding:3rem 0}
+.vin-section *:not(.btn){color:#fff}
+.vin-section input{background:rgba(255,255,255,.1);border:none;color:#fff}
+.vin-section input::placeholder{color:rgba(255,255,255,.4)}
+.help-card{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:6px;padding:1.5rem}
+.footer-dark{background:#111;padding:2.5rem 0 1rem}
+.footer-dark *{color:rgba(255,255,255,.6)!important;font-size:.82rem}
+.footer-dark h6{color:rgba(255,255,255,.9)!important;font-weight:700;font-size:.78rem;letter-spacing:.08em;text-transform:uppercase}
+.footer-dark a:hover{color:#fff!important}
+.social a{display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;border:1px solid rgba(255,255,255,.25);border-radius:50%;margin-right:.3rem;font-size:.9rem}
+.blue{color:#1c69d4!important}
