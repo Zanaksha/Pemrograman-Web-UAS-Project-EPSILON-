@@ -530,6 +530,196 @@
         background:#f5f5f5;
     }
 
+    #chat-btn {
+        position: fixed;
+        bottom: 24px;
+        right: 24px;
+        width: 56px;
+        height: 56px;
+        border: none;
+        border-radius: 50%;
+        background: #0066B1;
+        color: white;
+        font-size: 24px;
+        z-index: 9999;
+        cursor: pointer;
+        box-shadow: 0 4px 16px rgba(0,102,177,0.35);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: transform 0.15s ease;
+    }
+    #chat-btn:hover { transform: scale(1.08); }
+    #chat-btn img {
+        width: 30px;
+        height: 30px;
+        object-fit: contain;
+        filter: brightness(0) invert(1);
+    }
+
+    #chat-popup {
+        position: fixed;
+        bottom: 94px;
+        right: 24px;
+        width: 360px;
+        height: 520px;
+        background: #f0f2f5;
+        display: none;
+        border-radius: 20px;
+        overflow: hidden;
+        z-index: 9999;
+        box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+        flex-direction: column;
+    }
+
+    .chat-header {
+        background: #0066B1;
+        padding: 14px 16px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        flex-shrink: 0;
+    }
+    .chat-header-avatar {
+        width: 38px;
+        height: 38px;
+        border-radius: 50%;
+        background: rgba(255,255,255,0.2);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .chat-header-avatar img {
+        width: 22px;
+        height: 22px;
+        object-fit: contain;
+        filter: brightness(0) invert(1);
+    }
+    .chat-header-info { flex: 1; }
+    .chat-header-info .name {
+        color: #fff;
+        font-size: 14px;
+        font-weight: 600;
+        margin: 0;
+    }
+    .chat-header-info .status {
+        color: rgba(255,255,255,0.75);
+        font-size: 11px;
+        margin: 0;
+    }
+
+    #chat-box {
+        flex: 1;
+        overflow-y: auto;
+        padding: 14px 12px;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .msg-row { display: flex; align-items: flex-end; gap: 7px; }
+    .msg-row.user { justify-content: flex-end; }
+
+    .bot-avatar {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background: black;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+    }
+    .bot-avatar img {
+        width: 40px;
+        height: 40px;
+        object-fit: contain;
+        filter: brightness(0) invert(1);
+    }
+
+    .bubble {
+        max-width: 80%;
+        padding: 10px 14px;
+        font-size: 13.5px;
+        line-height: 1.5;
+        word-break: break-word;
+    }
+    .bubble.bot {
+        background: #fff;
+        color: #111;
+        border-radius: 16px 16px 16px 4px;
+        border: 0.5px solid rgba(0,0,0,0.08);
+    }
+    .bubble.user {
+        background: #0066B1;
+        color: #fff;
+        border-radius: 16px 16px 4px 16px;
+    }
+
+    .typing-dots {
+        display: flex;
+        gap: 4px;
+        align-items: center;
+        height: 16px;
+        padding: 0 2px;
+    }
+    .typing-dots span {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: #aaa;
+        animation: bounce 1s infinite;
+    }
+    .typing-dots span:nth-child(2) { animation-delay: 0.2s; }
+    .typing-dots span:nth-child(3) { animation-delay: 0.4s; }
+    @keyframes bounce {
+        0%, 80%, 100% { transform: translateY(0); }
+        40% { transform: translateY(-5px); }
+    }
+
+    .chat-input-area {
+        padding: 10px 12px;
+        background: #fff;
+        border-top: 1px solid rgba(0,0,0,0.07);
+        display: flex;
+        gap: 8px;
+        align-items: center;
+        flex-shrink: 0;
+    }
+    .chat-input-area input {
+        flex: 1;
+        border-radius: 20px;
+        padding: 9px 14px;
+        font-size: 13px;
+        border: 1px solid #e0e0e0;
+        background: #f0f2f5;
+        outline: none;
+        transition: border 0.15s;
+    }
+    .chat-input-area input:focus { border-color: #0066B1; }
+    .send-btn {
+        width: 38px;
+        height: 38px;
+        border-radius: 50%;
+        background: #0066B1;
+        border: none;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        transition: transform 0.15s;
+    }
+    .send-btn:hover { transform: scale(1.08); }
+    .send-btn svg {
+        width: 18px;
+        height: 18px;
+        fill: none;
+        stroke: white;
+        stroke-width: 2;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+    }
 
 </style>
 
@@ -609,6 +799,37 @@
 
     @yield('content')
 
+        <button id="chat-btn">
+        <img src="{{ asset('images/bmwchtbt.png') }}" alt="BMW Chat">
+    </button>
+
+    <div id="chat-popup">
+        <div class="chat-header">
+            <div class="chat-header-avatar">
+                <img src="{{ asset('images/bmwchtbt.png') }}" alt="">
+            </div>
+            <div class="chat-header-info">
+                <p class="name">EPSILON Assistant</p>
+                <p class="status">Online</p>
+            </div>
+        </div>
+
+        <div id="chat-box"></div>
+
+        <div class="chat-input-area">
+            <input
+                type="text"
+                id="message"
+                placeholder="Tanyakan tentang EPSILON..."
+                onkeydown="if(event.key==='Enter') sendMessage()"
+            >
+            <button class="send-btn" onclick="sendMessage()" aria-label="Kirim">
+                <svg viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+            </button>
+        </div>
+    </div>
+
+
     <footer class="site-footer">
         <div class="footer-top">
             <div class="footer-brand">
@@ -671,8 +892,75 @@
             }
         });
 
-        
+        document.getElementById('chat-btn').addEventListener('click', () => {
+            const popup = document.getElementById('chat-popup');
+            const isOpen = popup.style.display === 'flex';
+            popup.style.display = isOpen ? 'none' : 'flex';
+            if (!isOpen && document.getElementById('chat-box').children.length === 0) {
+                appendBot('Halo! Saya EPSILON Assistant. Ada yang bisa saya bantu tentang EPSILON? 🚗');
+            }
+         });
 
+        function appendUser(text) {
+            const box = document.getElementById('chat-box');
+            const row = document.createElement('div');
+            row.className = 'msg-row user';
+            row.innerHTML = `<div class="bubble user">${text}</div>`;
+            box.appendChild(row);
+            box.scrollTop = box.scrollHeight;
+        }
+
+        function appendBot(text) {
+            const box = document.getElementById('chat-box');
+            const row = document.createElement('div');
+            row.className = 'msg-row';
+            row.innerHTML = `
+                <div class="bot-avatar"><img src="{{ asset('images/bmwchtbt.png') }}" alt=""></div>
+                <div class="bubble bot">${text}</div>`;
+            box.appendChild(row);
+            box.scrollTop = box.scrollHeight;
+        }
+
+        function showTyping() {
+            const box = document.getElementById('chat-box');
+            const row = document.createElement('div');
+            row.className = 'msg-row';
+            row.id = 'typing-row';
+            row.innerHTML = `
+                <div class="bot-avatar"><img src="{{ asset('images/bmwchtbt.png') }}" alt=""></div>
+                <div class="bubble bot"><div class="typing-dots"><span></span><span></span><span></span></div></div>`;
+            box.appendChild(row);
+            box.scrollTop = box.scrollHeight;
+        }
+
+        function hideTyping() {
+            const t = document.getElementById('typing-row');
+            if (t) t.remove();
+        }
+
+        function sendMessage() {
+            const input = document.getElementById('message');
+            const message = input.value.trim();
+            if (!message) return;
+
+            appendUser(message);
+            input.value = '';
+            showTyping();
+
+            fetch('/chatbot/send', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                },
+                body: JSON.stringify({ message })
+            })
+            .then(res => res.json())
+            .then(data => {
+                hideTyping();
+                appendBot(data.reply);
+            });
+        }
         function handleSearch() {
             const query = document.getElementById('searchInput').value.trim();
             if (query !== '') {
@@ -683,6 +971,8 @@
         document.getElementById('searchInput').addEventListener('keypress', function (e) {
             if (e.key === 'Enter') handleSearch();
         });
+
+        
     </script>
 
 </body>

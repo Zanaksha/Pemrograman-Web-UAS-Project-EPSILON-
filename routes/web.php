@@ -8,6 +8,7 @@ use App\Http\Controllers\CarController;
 use App\Http\Controllers\ModelsController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\WarrantyController;
+use App\Http\Controllers\ChatbotController;
 
 Route::get('/warranties', [WarrantyController::class, 'index']);
 Route::post('/warranties/check', [WarrantyController::class, 'check'])->name('warranty.check');
@@ -46,6 +47,10 @@ Route::get('/models', [CarController::class, 'index']);
 Route::post('/contactinfo', [MessageController::class, 'store'])->name('message.store');
 
 Route::get('/brochure/{slug}', [CarController::class, 'brochure'])->name('brochure');
+
+Route::get('/chatbot', [ChatbotController::class, 'index']);
+
+Route::post('/chatbot/send', [ChatbotController::class, 'send']);
 
 Route::get('/', function () {   
     return view('home'); 
