@@ -906,7 +906,7 @@
         </div>
 
         <div class="footer-bottom">
-            <p>© 2025 BMW AG. All rights reserved.</p>
+            <p>© 2026 BMW AG. All rights reserved.</p>
             <div class="footer-links">
                 <a href="#">Privacy Policy</a>
                 <span>|</span>
