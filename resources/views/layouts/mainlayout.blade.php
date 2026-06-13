@@ -932,7 +932,7 @@
             const isOpen = popup.style.display === 'flex';
             popup.style.display = isOpen ? 'none' : 'flex';
             if (!isOpen && document.getElementById('chat-box').children.length === 0) {
-                appendBot('Halo! Saya EPSILON Assistant. Ada yang bisa saya bantu tentang EPSILON? 🚗');
+                appendBot('Hello! Im EPSILON Assistant, your virtual guide for EPSILON. How may I assist you today? 🚗');
             }
          });
 

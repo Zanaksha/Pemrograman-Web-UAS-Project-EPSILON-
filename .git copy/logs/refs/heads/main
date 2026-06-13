@@ -1,0 +1,4 @@
+0000000000000000000000000000000000000000 134ec785c0c2614ea80b75cb028e54c1de49c374 Farrel Octavian <farreloctavian32@gmail.com> 1781329953 +0700	commit (initial): add order system, my-orders page, admin order management, notification badge
+134ec785c0c2614ea80b75cb028e54c1de49c374 134ec785c0c2614ea80b75cb028e54c1de49c374 Farrel Octavian <farreloctavian32@gmail.com> 1781329975 +0700	Branch: renamed refs/heads/master to refs/heads/main
+134ec785c0c2614ea80b75cb028e54c1de49c374 37f9b773363f37ba6f2a5839c54fe446a96795c4 Farrel Octavian <farreloctavian32@gmail.com> 1781330525 +0700	commit (merge): resolve conflict database.php
+37f9b773363f37ba6f2a5839c54fe446a96795c4 0ebaf24db42fb0a624ae2c0b6a1dc8fb97f042eb Farrel Octavian <farreloctavian32@gmail.com> 1781331098 +0700	commit: resolve conflicts
