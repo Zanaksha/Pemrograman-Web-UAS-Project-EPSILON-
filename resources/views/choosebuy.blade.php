@@ -25,7 +25,7 @@
         @forelse($products as $i => $product)
         <div class="col-md-3" data-aos="fade-up" data-aos-delay="{{ $i * 100 }}">
             <div class="card product-card shadow-sm"
-                 onclick="window.location.href='/detail?produk={{ strtolower(str_replace(' ', '-', $product->name)) }}'">
+                 onclick="window.location.href='/produk-detail?produk={{ strtolower(str_replace(' ', '-', $product->name)) }}'">
                 <img src="{{ $product->image }}" class="card-img-top">
                 <div class="card-body">
                     <h4 class="fw-bold">{{ $product->name }}</h4>

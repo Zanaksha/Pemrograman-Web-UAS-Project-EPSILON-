@@ -4,11 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-<<<<<<< HEAD
     "content-hash": "459ae88091cf701540a5dd8ab0bd3a59",
-=======
-    "content-hash": "5cfaae294e7e70184a74ec6ada63ab5d",
->>>>>>> a312fddf1c54c060e6fe6f65d67bf1c7575797a3
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -1501,7 +1497,6 @@
         },
         {
             "name": "guzzlehttp/uri-template",
-<<<<<<< HEAD
             "version": "v1.0.7",
             "source": {
                 "type": "git",
@@ -1512,18 +1507,6 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/guzzle/uri-template/zipball/7fe811c23a9e3cd712b4389eaeb50b5456d8c529",
                 "reference": "7fe811c23a9e3cd712b4389eaeb50b5456d8c529",
-=======
-            "version": "v1.0.6",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/guzzle/uri-template.git",
-                "reference": "eef7f87bab6f204eba3c39224d8075c70c637946"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/uri-template/zipball/eef7f87bab6f204eba3c39224d8075c70c637946",
-                "reference": "eef7f87bab6f204eba3c39224d8075c70c637946",
->>>>>>> a312fddf1c54c060e6fe6f65d67bf1c7575797a3
                 "shasum": ""
             },
             "require": {
@@ -1580,11 +1563,7 @@
             ],
             "support": {
                 "issues": "https://github.com/guzzle/uri-template/issues",
-<<<<<<< HEAD
                 "source": "https://github.com/guzzle/uri-template/tree/v1.0.7"
-=======
-                "source": "https://github.com/guzzle/uri-template/tree/v1.0.6"
->>>>>>> a312fddf1c54c060e6fe6f65d67bf1c7575797a3
             },
             "funding": [
                 {
@@ -1600,11 +1579,7 @@
                     "type": "tidelift"
                 }
             ],
-<<<<<<< HEAD
             "time": "2026-06-12T21:33:43+00:00"
-=======
-            "time": "2026-05-23T22:00:21+00:00"
->>>>>>> a312fddf1c54c060e6fe6f65d67bf1c7575797a3
         },
         {
             "name": "laravel/framework",
@@ -2441,7 +2416,6 @@
             "time": "2025-07-25T09:04:22+00:00"
         },
         {
-<<<<<<< HEAD
             "name": "midtrans/midtrans-php",
             "version": "2.6.2",
             "source": {
@@ -2503,8 +2477,6 @@
             "time": "2025-03-18T06:30:17+00:00"
         },
         {
-=======
->>>>>>> a312fddf1c54c060e6fe6f65d67bf1c7575797a3
             "name": "monolog/monolog",
             "version": "2.11.0",
             "source": {
@@ -3919,7 +3891,6 @@
         },
         {
             "name": "sabberworm/php-css-parser",
-<<<<<<< HEAD
             "version": "v8.9.0",
             "source": {
                 "type": "git",
@@ -3930,34 +3901,15 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/MyIntervals/PHP-CSS-Parser/zipball/d8e916507b88e389e26d4ab03c904a082aa66bb9",
                 "reference": "d8e916507b88e389e26d4ab03c904a082aa66bb9",
-=======
-            "version": "v8.6.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/MyIntervals/PHP-CSS-Parser.git",
-                "reference": "d2fb94a9641be84d79c7548c6d39bbebba6e9a70"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/MyIntervals/PHP-CSS-Parser/zipball/d2fb94a9641be84d79c7548c6d39bbebba6e9a70",
-                "reference": "d2fb94a9641be84d79c7548c6d39bbebba6e9a70",
->>>>>>> a312fddf1c54c060e6fe6f65d67bf1c7575797a3
                 "shasum": ""
             },
             "require": {
                 "ext-iconv": "*",
-<<<<<<< HEAD
                 "php": "^5.6.20 || ^7.0.0 || ~8.0.0 || ~8.1.0 || ~8.2.0 || ~8.3.0 || ~8.4.0"
             },
             "require-dev": {
                 "phpunit/phpunit": "5.7.27 || 6.5.14 || 7.5.20 || 8.5.41",
                 "rawr/cross-data-providers": "^2.0.0"
-=======
-                "php": ">=5.6.20"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "^5.7.27"
->>>>>>> a312fddf1c54c060e6fe6f65d67bf1c7575797a3
             },
             "suggest": {
                 "ext-mbstring": "for parsing UTF-8 CSS"
@@ -3999,15 +3951,9 @@
             ],
             "support": {
                 "issues": "https://github.com/MyIntervals/PHP-CSS-Parser/issues",
-<<<<<<< HEAD
                 "source": "https://github.com/MyIntervals/PHP-CSS-Parser/tree/v8.9.0"
             },
             "time": "2025-07-11T13:20:48+00:00"
-=======
-                "source": "https://github.com/MyIntervals/PHP-CSS-Parser/tree/v8.6.0"
-            },
-            "time": "2024-07-01T07:33:21+00:00"
->>>>>>> a312fddf1c54c060e6fe6f65d67bf1c7575797a3
         },
         {
             "name": "symfony/console",

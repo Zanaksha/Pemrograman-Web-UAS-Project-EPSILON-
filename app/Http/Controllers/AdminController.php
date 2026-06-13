@@ -8,6 +8,7 @@ use App\Models\Product;
 use App\Models\Message;
 use App\Models\Warranty;
 use App\Models\ServiceHistory;
+use App\Models\Order;
 
 class AdminController extends Controller
 {
@@ -206,16 +207,47 @@ class AdminController extends Controller
         return redirect()->route('admin.warranties.edit', $id)->with('success', 'Service history berhasil ditambahkan!');
     }
 
-        public function orders()
+    public function orders()
     {
-        $orders = \App\Models\Order::orderBy('created_at', 'desc')->get();
+        $orders = Order::orderBy('created_at', 'desc')->get();
         return view('admin.orders', compact('orders'));
     }
 
-    public function orderStatus(Request $request, $id)
+    public function orderConfirm($id)
     {
-        $order = \App\Models\Order::findOrFail($id);
-        $order->update(['status' => $request->status]);
-        return redirect()->back()->with('success', 'Status updated!');
+        $order = Order::findOrFail($id);
+        $order->update(['status' => 'confirmed']);
+        return redirect()->route('admin.orders')->with('success', 'Order berhasil dikonfirmasi!');
     }
+
+    public function generateWarranty(Request $request, $id)
+    {
+        $order = Order::findOrFail($id);
+
+        $vin = 'WBA' . strtoupper(substr(md5($order->order_id), 0, 14));
+
+        $warranty = Warranty::create([
+            'vin'            => $vin,
+            'owner_name'     => $order->nama,
+            'owner_email'    => $order->email,
+            'car_model'      => $order->model,
+            'car_year'       => date('Y'),
+            'purchase_date'  => $order->created_at->format('Y-m-d'),
+            'warranty_start' => $order->created_at->format('Y-m-d'),
+            'warranty_end'   => $order->created_at->addYears(4)->format('Y-m-d'),
+            'status'         => 'active',
+            'notes'          => 'Auto-generated from Order ' . $order->order_id,
+        ]);
+
+        $order->update(['vin' => $vin, 'status' => 'delivered']);
+
+        return redirect()->route('admin.orders')->with('success', 'Warranty berhasil digenerate! VIN: ' . $vin);
+    }
+    
+    public function orderDestroy($id)
+    {
+        Order::findOrFail($id)->delete();
+        return redirect()->back()->with('success', 'Order berhasil dihapus!');
+    }
+    
 }

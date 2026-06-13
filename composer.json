@@ -12,12 +12,8 @@
         "guzzlehttp/guzzle": "^7.2",
         "laravel/framework": "^9.0",
         "laravel/sanctum": "^2.14",
-<<<<<<< HEAD
         "laravel/tinker": "^2.7",
         "midtrans/midtrans-php": "^2.6"
-=======
-        "laravel/tinker": "^2.7"
->>>>>>> a312fddf1c54c060e6fe6f65d67bf1c7575797a3
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",
@@ -63,12 +59,8 @@
     "config": {
         "optimize-autoloader": true,
         "preferred-install": "dist",
-<<<<<<< HEAD
         "sort-packages": true,
         "platform-check": false
-=======
-        "sort-packages": true
->>>>>>> a312fddf1c54c060e6fe6f65d67bf1c7575797a3
     },
     "minimum-stability": "dev",
     "prefer-stable": true

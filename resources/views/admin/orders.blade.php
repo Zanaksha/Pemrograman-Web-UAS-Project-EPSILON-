@@ -7,30 +7,9 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
     <style>
         body { background: #f8f9fa; }
-        .sidebar {
-            min-height: 100vh;
-            background: #111;
-            color: white;
-            padding: 20px 0;
-            width: 250px;
-            position: fixed;
-        }
-        .sidebar .brand {
-            padding: 20px 24px;
-            font-size: 20px;
-            font-weight: 700;
-            letter-spacing: 3px;
-            border-bottom: 1px solid #222;
-            margin-bottom: 10px;
-        }
-        .sidebar a {
-            display: block;
-            padding: 12px 24px;
-            color: #aaa;
-            text-decoration: none;
-            font-size: 14px;
-            transition: 0.2s;
-        }
+        .sidebar { min-height: 100vh; background: #111; color: white; padding: 20px 0; width: 250px; position: fixed; }
+        .sidebar .brand { padding: 20px 24px; font-size: 20px; font-weight: 700; letter-spacing: 3px; border-bottom: 1px solid #222; margin-bottom: 10px; }
+        .sidebar a { display: block; padding: 12px 24px; color: #aaa; text-decoration: none; font-size: 14px; transition: 0.2s; }
         .sidebar a:hover, .sidebar a.active { background: #1a1a1a; color: #fff; border-left: 3px solid #0066cc; }
         .main { margin-left: 250px; padding: 30px; }
         .top-bar { background: white; padding: 16px 30px; margin: -30px -30px 30px; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; align-items: center; }
@@ -66,22 +45,21 @@
         <div class="alert alert-success">{{ session('success') }}</div>
     @endif
 
-    <table class="table table-bordered table-hover">
+    @php
+        $mobilOrders = $orders->filter(fn($o) => $o->type == 'car');
+        $produkOrders = $orders->filter(fn($o) => $o->type == 'product');
+    @endphp
+
+    <h4 class="mb-3">🚗 Pesanan Mobil</h4>
+    <table class="table table-bordered table-hover mb-5">
         <thead class="table-dark">
             <tr>
-                <th>Order ID</th>
-                <th>Nama</th>
-                <th>Email</th>
-                <th>Phone</th>
-                <th>Model</th>
-                <th>Warna</th>
-                <th>Harga</th>
-                <th>Status</th>
-                <th>Aksi</th>
+                <th>Order ID</th><th>Nama</th><th>Email</th><th>Phone</th>
+                <th>Model</th><th>Warna</th><th>Harga</th><th>Status</th><th>Aksi</th>
             </tr>
         </thead>
         <tbody>
-            @forelse($orders as $order)
+            @forelse($mobilOrders as $order)
             <tr>
                 <td>{{ $order->order_id }}</td>
                 <td>{{ $order->nama }}</td>
@@ -91,17 +69,13 @@
                 <td>{{ $order->warna }}</td>
                 <td>Rp {{ number_format($order->harga, 0, ',', '.') }}</td>
                 <td>
-                    <span class="badge 
-                        {{ $order->status == 'pending' ? 'bg-warning text-dark' : '' }}
-                        {{ $order->status == 'confirmed' ? 'bg-success' : '' }}
-                        {{ $order->status == 'cancelled' ? 'bg-danger' : '' }}">
+                    <span class="badge {{ $order->status == 'pending' ? 'bg-warning text-dark' : ($order->status == 'confirmed' ? 'bg-success' : 'bg-danger') }}">
                         {{ $order->status }}
                     </span>
                 </td>
                 <td>
-                    <form method="POST" action="/admin/orders/{{ $order->id }}/status">
-                        @csrf
-                        @method('PUT')
+                  <form method="POST" action="/admin/orders/{{ $order->id }}/status" style="display:inline;">
+                        @csrf @method('PUT')
                         <select name="status" class="form-select form-select-sm d-inline w-auto">
                             <option value="pending" {{ $order->status == 'pending' ? 'selected' : '' }}>Pending</option>
                             <option value="confirmed" {{ $order->status == 'confirmed' ? 'selected' : '' }}>Confirmed</option>
@@ -109,12 +83,65 @@
                         </select>
                         <button type="submit" class="btn btn-sm btn-primary ms-1">Update</button>
                     </form>
+                    <form method="POST" action="/admin/orders/{{ $order->id }}/delete" style="display:inline;">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-sm btn-danger ms-1" onclick="return confirm('Hapus order ini?')" title="Hapus">
+                            <i class="bi bi-trash"></i>
+                        </button>
+                    </form>
                 </td>
             </tr>
             @empty
+            <tr><td colspan="9" class="text-center">Belum ada pesanan mobil.</td></tr>
+            @endforelse
+        </tbody>
+    </table>
+
+    <h4 class="mb-3">🛍️ Pesanan Side Product</h4>
+    <table class="table table-bordered table-hover">
+        <thead class="table-dark">
             <tr>
-                <td colspan="9" class="text-center">Belum ada pesanan.</td>
+                <th>Order ID</th><th>Nama</th><th>Email</th><th>Phone</th>
+                <th>Produk</th><th>Ukuran</th><th>Harga</th><th>Status</th><th>Aksi</th>
             </tr>
+        </thead>
+        <tbody>
+            @forelse($produkOrders as $order)
+            <tr>
+                <td>{{ $order->order_id }}</td>
+                <td>{{ $order->nama }}</td>
+                <td>{{ $order->email }}</td>
+                <td>{{ $order->phone }}</td>
+                <td>{{ $order->model }}</td>
+                <td>{{ $order->size ?? '-' }}</td>
+                <td>Rp {{ number_format($order->harga, 0, ',', '.') }}</td>
+                <td>
+                    <span class="badge {{ $order->status == 'pending' ? 'bg-warning text-dark' : ($order->status == 'confirmed' ? 'bg-success' : 'bg-danger') }}">
+                        {{ $order->status }}
+                    </span>
+                </td>
+                <td>
+                    <form method="POST" action="/admin/orders/{{ $order->id }}/status" style="display:inline;">
+                        @csrf @method('PUT')
+                        <select name="status" class="form-select form-select-sm d-inline w-auto">
+                            <option value="pending" {{ $order->status == 'pending' ? 'selected' : '' }}>Pending</option>
+                            <option value="confirmed" {{ $order->status == 'confirmed' ? 'selected' : '' }}>Confirmed</option>
+                            <option value="cancelled" {{ $order->status == 'cancelled' ? 'selected' : '' }}>Cancelled</option>
+                        </select>
+                        <button type="submit" class="btn btn-sm btn-primary ms-1">Update</button>
+                    </form>
+                    <form method="POST" action="/admin/orders/{{ $order->id }}/delete" style="display:inline;">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-sm btn-danger ms-1" onclick="return confirm('Hapus order ini?')" title="Hapus">
+                                <i class="bi bi-trash"></i>
+                            </button>
+                        </form>
+                </td>
+            </tr>
+            @empty
+            <tr><td colspan="8" class="text-center">Belum ada pesanan produk.</td></tr>
             @endforelse
         </tbody>
     </table>

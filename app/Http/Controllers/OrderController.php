@@ -15,32 +15,30 @@ class OrderController extends Controller
         }
 
         $order = Order::create([
-            'user_id' => Auth::id(),
+            'user_id'  => Auth::id(),
             'order_id' => 'BMW-' . time(),
-            'nama' => $request->nama,
-            'email' => $request->email,
-            'phone' => $request->phone,
-            'kota' => $request->kota,
-            'model' => $request->model,
-            'warna' => $request->warna,
-            'harga' => $request->harga,
-            'status' => 'pending'
+            'nama'     => $request->nama,
+            'email'    => $request->email,
+            'phone'    => $request->phone,
+            'kota'     => $request->kota,
+            'model'    => $request->model,
+            'warna'    => $request->warna ?? '-',
+            'size'     => $request->size ?? '-',
+            'harga'    => $request->harga,
+            'status'   => 'pending',
+            'type'     => $request->type ?? 'car'
         ]);
 
         return response()->json([
-            'success' => true,
-            'order_id' => $order->order_id
+            'success'  => true,
+            'order_id' => $order->order_id,
         ]);
     }
 
     public function myOrders()
     {
         $orders = Order::where('user_id', Auth::id())->orderBy('created_at', 'desc')->get();
-        
-        // Update last_seen saat user buka halaman ini
         Auth::user()->update(['last_seen' => now()]);
-        
         return view('my-orders', compact('orders'));
     }
-    
 }

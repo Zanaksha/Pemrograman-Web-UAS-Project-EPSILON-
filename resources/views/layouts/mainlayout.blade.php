@@ -1007,9 +1007,12 @@
             }
         }
 
-        document.getElementById('searchInput').addEventListener('keypress', function (e) {
-            if (e.key === 'Enter') handleSearch();
-        });
+        const searchInput = document.getElementById('searchInput');
+            if (searchInput) {
+                searchInput.addEventListener('keypress', function (e) {
+                    if (e.key === 'Enter') handleSearch();
+                });
+            }
 
         
     </script>

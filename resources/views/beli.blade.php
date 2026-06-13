@@ -376,6 +376,7 @@
                 model: state.car,
                 warna: warna,
                 harga: hargaAngka,
+                type: 'car'
             })
         })
         .then(res => res.json())
@@ -415,6 +416,40 @@ function resetAll() {
         state.car = model;
         state.price = harga;
     }
+
+    function submitOrder() {
+    const nama  = document.getElementById('f_nama').value;
+    const ktp   = document.getElementById('f_ktp').value;
+    const email = document.getElementById('f_email').value;
+    const telp  = document.getElementById('f_telp').value;
+    const kota  = document.getElementById('f_kota').value;
+    const warna = document.getElementById('f_warna').value;
+
+    fetch('/order', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
+        },
+        body: JSON.stringify({
+            nama, ktp, email, telp, kota, warna,
+            model: state.car,
+            harga: state.price,
+            pembayaran: state.pay
+        })
+    })
+    .then(res => res.json())
+    .then(data => {
+        if (data.success) {
+            document.getElementById('orderId').textContent = 'Order ID: ' + data.order_id;
+            document.getElementById('successDetail').textContent = state.car + ' — ' + state.price;
+            showStep(5);
+        }
+    })
+    .catch(err => {
+        alert('Gagal membuat order. Coba lagi!');
+    });
+}
 });
 </script>
 

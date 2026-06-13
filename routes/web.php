@@ -11,6 +11,33 @@ use App\Http\Controllers\WarrantyController;
 use App\Http\Controllers\ChatbotController;
 use App\Http\Controllers\OrderController;
 
+    
+
+    Route::get('/produk-detail', function () {
+    $produk = \App\Models\Product::where('name', request('produk', ''))->first();
+    return view('produk-detail', compact('produk'));
+    });
+
+    Route::get('/beli-produk', function () {
+        return view('beli-produk');
+    });
+
+        Route::get('/sneakers', function () { 
+        return redirect('/produk-detail?produk=sneakers'); 
+    });
+
+    Route::get('/hoodie', function () { 
+        return redirect('/produk-detail?produk=hoodie'); 
+    });
+
+    Route::get('/watch', function () { 
+        return redirect('/produk-detail?produk=watch'); 
+    });
+
+    Route::get('/tshirt', function () { 
+        return redirect('/produk-detail?produk=tshirt'); 
+    });
+
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
@@ -24,9 +51,14 @@ Route::get('/warranties', [WarrantyController::class, 'index']);
 Route::post('/warranties/check', [WarrantyController::class, 'check'])->name('warranty.check');
 
 Route::middleware(['admin'])->prefix('admin')->group(function () {
+
+    Route::delete('/orders/{id}/delete', [AdminController::class, 'orderDestroy'])->name('admin.orders.destroy');
+
     Route::get('/', [AdminController::class, 'dashboard'])->name('admin.dashboard');
 
     Route::get('/orders', [AdminController::class, 'orders'])->name('admin.orders');
+    Route::get('/orders/{id}/confirm', [AdminController::class, 'orderConfirm'])->name('admin.orders.confirm');
+    Route::post('/orders/{id}/generate-warranty', [AdminController::class, 'generateWarranty'])->name('admin.orders.warranty');
     Route::put('/orders/{id}/status', [AdminController::class, 'orderStatus'])->name('admin.orders.status');
 
     Route::get('/cars', [AdminController::class, 'cars'])->name('admin.cars');
@@ -185,21 +217,6 @@ Route::get('/warranty', function () {
     return view('warranty'); 
 });
 
-Route::get('/sneakers', function () { 
-    return view('sneakers'); 
-});
-
-Route::get('/hoodie', function () { 
-    return view('hoodie'); 
-});
-
-Route::get('/watch', function () { 
-    return view('watch'); 
-});
-
-Route::get('/tshirt', function () { 
-    return view('tshirt'); 
-});
 
 Route::get('/jacket', function () { 
     return view('jacket'); 

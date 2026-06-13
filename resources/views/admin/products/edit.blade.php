@@ -61,6 +61,10 @@
                     <input type="number" name="stock" class="form-control" value="{{ $product->stock }}" required>
                 </div>
                 <div class="col-12">
+                    <label class="form-label">Sizes <small class="text-muted">(pisah dengan koma, contoh: S,M,L,XL atau 38,39,40)</small></label>
+                    <input type="text" name="sizes" class="form-control" value="{{ $product->sizes }}" placeholder="Kosongkan jika tidak ada ukuran">
+                </div>
+                <div class="col-12">
                     <label class="form-label">Description</label>
                     <textarea name="description" class="form-control" rows="3">{{ $product->description }}</textarea>
                 </div>
