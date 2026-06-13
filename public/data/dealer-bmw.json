@@ -1,0 +1,82 @@
+[
+    {
+        "id": 1,
+        "nama": "BMW Astra - Jakarta Selatan",
+        "alamat": "Jl. Sisingamangaraja No.10, Jakarta Selatan",
+        "telepon": "(021) 7221234",
+        "lat": -6.2297,
+        "lng": 106.8201
+    },
+    {
+        "id": 2,
+        "nama": "BMW Astra - Surabaya",
+        "alamat": "Jl. Basuki Rahmat No.52, Surabaya",
+        "telepon": "(031) 5312345",
+        "lat": -7.2575,
+        "lng": 112.7521
+    },
+    {
+        "id": 3,
+        "nama": "BMW Astra - Bandung",
+        "alamat": "Jl. Soekarno Hatta No.541, Bandung",
+        "telepon": "(022) 6012345",
+        "lat": -6.9478,
+        "lng": 107.6412
+    },
+    {
+        "id": 4,
+        "nama": "BMW Astra - Yogyakarta",
+        "alamat": "Jl. Magelang No.123, Yogyakarta",
+        "telepon": "(0274) 512345",
+        "lat": -7.7956,
+        "lng": 110.3695
+    },
+    {
+        "id": 5,
+        "nama": "BMW Astra - Medan",
+        "alamat": "Jl. Gatot Subroto No.201, Medan",
+        "telepon": "(061) 4512345",
+        "lat": 3.5896,
+        "lng": 98.6731
+    },
+    {
+        "id": 6,
+        "nama": "BMW Astra - Semarang",
+        "alamat": "Jl. Ahmad Yani No.145, Semarang",
+        "telepon": "(024) 8412345",
+        "lat": -6.9932,
+        "lng": 110.4203
+    },
+    {
+        "id": 7,
+        "nama": "BMW Astra - Bali",
+        "alamat": "Jl. Sunset Road No.88, Kuta, Bali",
+        "telepon": "(0361) 712345",
+        "lat": -8.7215,
+        "lng": 115.1694
+    },
+    {
+        "id": 8,
+        "nama": "BMW Astra - Makassar",
+        "alamat": "Jl. Urip Sumoharjo No.55, Makassar",
+        "telepon": "(0411) 312345",
+        "lat": -5.1477,
+        "lng": 119.4327
+    },
+    {
+        "id": 9,
+        "nama": "BMW Astra - Palembang",
+        "alamat": "Jl. Jenderal Sudirman No.72, Palembang",
+        "telepon": "(0711) 312345",
+        "lat": -2.9761,
+        "lng": 104.7754
+    },
+    {
+        "id": 10,
+        "nama": "BMW Astra - Balikpapan",
+        "alamat": "Jl. MT Haryono No.99, Balikpapan",
+        "telepon": "(0542) 412345",
+        "lat": -1.2654,
+        "lng": 116.8312
+    }
+]
