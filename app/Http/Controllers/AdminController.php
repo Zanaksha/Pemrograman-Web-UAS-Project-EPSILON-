@@ -205,7 +205,6 @@ class AdminController extends Controller
         ]);
         return redirect()->route('admin.warranties.edit', $id)->with('success', 'Service history berhasil ditambahkan!');
     }
-<<<<<<< HEAD
 
         public function orders()
     {
@@ -219,6 +218,4 @@ class AdminController extends Controller
         $order->update(['status' => $request->status]);
         return redirect()->back()->with('success', 'Status updated!');
     }
-=======
->>>>>>> a312fddf1c54c060e6fe6f65d67bf1c7575797a3
 }

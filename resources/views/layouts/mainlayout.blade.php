@@ -696,6 +696,9 @@
         outline: none;
         transition: border 0.15s;
     }
+    .bubble.bot {
+    white-space: pre-line; 
+    }
     .chat-input-area input:focus { border-color: #0066B1; }
     .send-btn {
         width: 38px;
@@ -766,7 +769,6 @@
 
                 @auth
                 <div class="dropdown">
-<<<<<<< HEAD
                     <button class="profile-btn position-relative" data-bs-toggle="dropdown">
                         {{ strtoupper(substr(Auth::user()->name, 0, 1)) }}
                 @php
@@ -790,11 +792,6 @@
                     "></span>
                 @endif
             </button>
-=======
-                    <button class="profile-btn" data-bs-toggle="dropdown">
-                        {{ strtoupper(substr(Auth::user()->name, 0, 1)) }}
-                    </button>
->>>>>>> a312fddf1c54c060e6fe6f65d67bf1c7575797a3
                 <div class="dropdown-menu profile-menu p-0">
                     <div class="profile-header">
                         <small>SIGNED IN AS</small>
@@ -808,7 +805,6 @@
                             <a href="/profile" class="dropdown-item menu-item">
                                 👤<span>Profile</span>
                             </a>
-<<<<<<< HEAD
 
                             <a href="/my-orders" class="dropdown-item menu-item">
                             🛒<span>Pesanan Saya</span>
@@ -824,8 +820,6 @@
                             @endif
                         </a>
 
-=======
->>>>>>> a312fddf1c54c060e6fe6f65d67bf1c7575797a3
                                 <form method="POST" action="{{ route('logout') }}">
                                     @csrf
                                         <button type="submit" class="dropdown-item menu-item text-danger">
@@ -915,7 +909,7 @@
         </div>
 
         <div class="footer-bottom">
-            <p>© 2025 BMW AG. All rights reserved.</p>
+            <p>© 2026 BMW AG. All rights reserved.</p>
             <div class="footer-links">
                 <a href="#">Privacy Policy</a>
                 <span>|</span>
@@ -941,7 +935,7 @@
             const isOpen = popup.style.display === 'flex';
             popup.style.display = isOpen ? 'none' : 'flex';
             if (!isOpen && document.getElementById('chat-box').children.length === 0) {
-                appendBot('Halo! Saya EPSILON Assistant. Ada yang bisa saya bantu tentang EPSILON? 🚗');
+                appendBot('Hello! Im EPSILON Assistant, your virtual guide for EPSILON. How may I assist you today? 🚗');
             }
          });
 
@@ -958,6 +952,7 @@
             const box = document.getElementById('chat-box');
             const row = document.createElement('div');
             row.className = 'msg-row';
+            const formatted = text.replace(/\n/g, '<br>');
             row.innerHTML = `
                 <div class="bot-avatar"><img src="{{ asset('images/bmwchtbt.png') }}" alt=""></div>
                 <div class="bubble bot">${text}</div>`;

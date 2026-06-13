@@ -9,7 +9,6 @@ use App\Http\Controllers\ModelsController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\WarrantyController;
 use App\Http\Controllers\ChatbotController;
-<<<<<<< HEAD
 use App\Http\Controllers\OrderController;
 
 Route::middleware('auth')->group(function () {
@@ -20,8 +19,6 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::post('/order', [OrderController::class, 'store'])->name('order.store');
-=======
->>>>>>> a312fddf1c54c060e6fe6f65d67bf1c7575797a3
 
 Route::get('/warranties', [WarrantyController::class, 'index']);
 Route::post('/warranties/check', [WarrantyController::class, 'check'])->name('warranty.check');
@@ -29,12 +26,9 @@ Route::post('/warranties/check', [WarrantyController::class, 'check'])->name('wa
 Route::middleware(['admin'])->prefix('admin')->group(function () {
     Route::get('/', [AdminController::class, 'dashboard'])->name('admin.dashboard');
 
-<<<<<<< HEAD
     Route::get('/orders', [AdminController::class, 'orders'])->name('admin.orders');
     Route::put('/orders/{id}/status', [AdminController::class, 'orderStatus'])->name('admin.orders.status');
 
-=======
->>>>>>> a312fddf1c54c060e6fe6f65d67bf1c7575797a3
     Route::get('/cars', [AdminController::class, 'cars'])->name('admin.cars');
     Route::get('/cars/create', [AdminController::class, 'carCreate'])->name('admin.cars.create');
     Route::post('/cars', [AdminController::class, 'carStore'])->name('admin.cars.store');

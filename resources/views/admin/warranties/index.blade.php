@@ -22,25 +22,16 @@
     <a href="/admin"><i class="bi bi-speedometer2 me-2"></i> Dashboard</a>
     <a href="/admin/cars"><i class="bi bi-car-front me-2"></i> Manage Cars</a>
     <a href="/admin/products"><i class="bi bi-bag me-2"></i> Manage Products</a>
-<<<<<<< HEAD
     <a href="/admin/warranties"><i class="bi bi-shield-check me-2"></i> Warranties</a>
     <a href="/admin/messages"><i class="bi bi-envelope me-2"></i> Messages</a>
     <a href="/admin/orders" class="active"><i class="bi bi-cart-check me-2"></i> Orders</a>
-=======
-    <a href="/admin/warranties" class="active"><i class="bi bi-shield-check me-2"></i> Warranties</a>
-    <a href="/admin/messages"><i class="bi bi-envelope me-2"></i> Messages</a>
->>>>>>> a312fddf1c54c060e6fe6f65d67bf1c7575797a3
     <hr style="border-color:#222; margin:10px 24px;">
     <a href="/"><i class="bi bi-house me-2"></i> Back to Website</a>
     <form method="POST" action="{{ route('logout') }}" style="padding:0 24px; margin-top:10px;">
         @csrf
-<<<<<<< HEAD
         <button type="submit" style="width:100%; padding:10px; background:#cc0000; color:white; border:none; border-radius:6px; cursor:pointer;">
             <i class="bi bi-box-arrow-right me-2"></i> Logout
         </button>
-=======
-        <button type="submit" style="width:100%; padding:10px; background:#cc0000; color:white; border:none; border-radius:6px; cursor:pointer;">Logout</button>
->>>>>>> a312fddf1c54c060e6fe6f65d67bf1c7575797a3
     </form>
 </div>
 
