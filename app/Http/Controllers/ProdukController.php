@@ -18,6 +18,10 @@ class ProdukController extends Controller
 
     public function detail()
     {
+<<<<<<< HEAD
         return view('beli');
+=======
+        return view('detail');
+>>>>>>> a312fddf1c54c060e6fe6f65d67bf1c7575797a3
     }
 }

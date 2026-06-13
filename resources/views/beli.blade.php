@@ -225,6 +225,7 @@
         </div>
     </div>
 
+<<<<<<< HEAD
    {{-- Step 3: Pembayaran --}}
 <div class="panel" id="panel3">
     <p class="section-title">Pilih metode pembayaran:</p>
@@ -251,6 +252,34 @@
         <button class="btn-next" onclick="goStep(4)">Lanjut &rarr;</button>
     </div>
 </div>
+=======
+    {{-- Step 3: Pembayaran --}}
+    <div class="panel" id="panel3">
+        <p class="section-title">Pilih metode pembayaran:</p>
+        <div class="pay-opts">
+            <div class="pay-opt" onclick="selectPay(this,'Cash / Transfer')">
+                <div class="pay-emoji">🏦</div>
+                <div class="pay-name">Cash</div>
+                <div class="pay-desc">Transfer langsung</div>
+            </div>
+            <div class="pay-opt" onclick="selectPay(this,'Kredit / Cicilan')">
+                <div class="pay-emoji">💳</div>
+                <div class="pay-name">Kredit</div>
+                <div class="pay-desc">Cicilan bulanan</div>
+            </div>
+            <div class="pay-opt" onclick="selectPay(this,'Leasing BMW')">
+                <div class="pay-emoji">📋</div>
+                <div class="pay-name">Leasing</div>
+                <div class="pay-desc">BMW Financial Services</div>
+            </div>
+        </div>
+        <p class="err" id="err3">Pilih metode pembayaran.</p>
+        <div class="nav-btns">
+            <button class="btn-back" onclick="goStep(2)">&larr; Kembali</button>
+            <button class="btn-next" onclick="goStep(4)">Lanjut &rarr;</button>
+        </div>
+    </div>
+>>>>>>> a312fddf1c54c060e6fe6f65d67bf1c7575797a3
 
     {{-- Step 4: Konfirmasi --}}
     <div class="panel" id="panel4">
@@ -355,6 +384,7 @@
     }
 
     function submitOrder() {
+<<<<<<< HEAD
         const nama  = document.getElementById('f_nama').value;
         const email = document.getElementById('f_email').value;
         const telp  = document.getElementById('f_telp').value;
@@ -391,6 +421,24 @@
 function resetAll() {
     window.location.href = '/buycar';
 }
+=======
+        const id = 'BMW-' + Date.now().toString().slice(-6);
+        document.getElementById('orderId').textContent = 'Order ID: ' + id;
+        document.getElementById('successDetail').textContent = state.car + ' — ' + state.price;
+        showStep(5);
+    }
+
+    function resetAll() {
+        state = { step: 1, car: '', price: '', pay: '' };
+        document.querySelectorAll('.car-card').forEach(c => c.classList.remove('selected'));
+        document.querySelectorAll('.pay-opt').forEach(p => p.classList.remove('selected'));
+        ['f_nama','f_ktp','f_email','f_telp','f_kota'].forEach(id => {
+            document.getElementById(id).value = '';
+        });
+        document.getElementById('f_warna').value = '';
+        showStep(1);
+    }
+>>>>>>> a312fddf1c54c060e6fe6f65d67bf1c7575797a3
 
   document.addEventListener('DOMContentLoaded', function () {
     const params = new URLSearchParams(window.location.search);

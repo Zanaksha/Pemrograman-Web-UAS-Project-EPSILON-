@@ -766,6 +766,7 @@
 
                 @auth
                 <div class="dropdown">
+<<<<<<< HEAD
                     <button class="profile-btn position-relative" data-bs-toggle="dropdown">
                         {{ strtoupper(substr(Auth::user()->name, 0, 1)) }}
                 @php
@@ -789,6 +790,11 @@
                     "></span>
                 @endif
             </button>
+=======
+                    <button class="profile-btn" data-bs-toggle="dropdown">
+                        {{ strtoupper(substr(Auth::user()->name, 0, 1)) }}
+                    </button>
+>>>>>>> a312fddf1c54c060e6fe6f65d67bf1c7575797a3
                 <div class="dropdown-menu profile-menu p-0">
                     <div class="profile-header">
                         <small>SIGNED IN AS</small>
@@ -802,6 +808,7 @@
                             <a href="/profile" class="dropdown-item menu-item">
                                 👤<span>Profile</span>
                             </a>
+<<<<<<< HEAD
 
                             <a href="/my-orders" class="dropdown-item menu-item">
                             🛒<span>Pesanan Saya</span>
@@ -817,6 +824,8 @@
                             @endif
                         </a>
 
+=======
+>>>>>>> a312fddf1c54c060e6fe6f65d67bf1c7575797a3
                                 <form method="POST" action="{{ route('logout') }}">
                                     @csrf
                                         <button type="submit" class="dropdown-item menu-item text-danger">
