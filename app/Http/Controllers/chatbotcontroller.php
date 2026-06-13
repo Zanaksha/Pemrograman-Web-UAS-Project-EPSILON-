@@ -30,7 +30,7 @@ class ChatbotController extends Controller
             {
                 return response()->json([
                     'reply' =>
-                    "BMW {$car->name}\n\n" .
+                    "EPSILON {$car->name}\n\n" .
                     "Engine: {$car->engine}\n" .
                     "Transmission: {$car->transmission}\n" .
                     "Drivetrain: {$car->drivetrain}\n" .
@@ -49,7 +49,7 @@ class ChatbotController extends Controller
             {
                 return response()->json([
                     'reply' =>
-                    "Harga BMW {$car->name}: {$car->price}"
+                    "Harga EPSILON {$car->name}: {$car->price}"
                 ]);
             }
 
@@ -70,7 +70,7 @@ class ChatbotController extends Controller
             $cars = CarModel::where('category', 'SUV')->pluck('name');
 
             return response()->json([
-                'reply' => 'BMW SUV Models: ' . $cars->implode(', ')
+                'reply' => 'EPSILON SUV Models : ' . $cars->implode(', ')
             ]);
         }
 
@@ -79,7 +79,16 @@ class ChatbotController extends Controller
             $cars = CarModel::where('category', 'Sedan')->pluck('name');
 
             return response()->json([
-                'reply' => 'BMW Sedan Models: ' . $cars->implode(', ')
+                'reply' => 'EPSILON Sedan Models : ' . $cars->implode(', ')
+            ]);
+        }
+
+        if (str_contains($message, 'category'))
+        {
+            $categories = CarModel::distinct()->pluck('category');
+
+            return response()->json([
+                'reply' => 'EPSILON Car Categories: ' . $categories->implode(', ')
             ]);
         }
 
