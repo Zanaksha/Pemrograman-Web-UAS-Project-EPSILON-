@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\ChatbotResponse;
 use App\Models\CarModel;
+use App\Models\Product;
 
 class ChatbotController extends Controller
 {
@@ -18,6 +19,7 @@ class ChatbotController extends Controller
         $message = strtolower(trim($request->message));
 
         $cars = CarModel::all();
+        $sides = Product::all();
 
         foreach ($cars as $car)
         {
@@ -64,6 +66,31 @@ class ChatbotController extends Controller
                 ]);
             }
         }
+
+        foreach ($sides as $side)
+            {
+                $barang = strtolower($side->name);
+                if (
+                str_contains($message, 'stok') &&
+                str_contains($message, $barang)
+                )
+                {
+                    return response()->json([
+                        'reply' =>"Stok {$side->name} adalah {$side->stock}"
+                    ]);
+                }
+
+                if (
+                str_contains($message, 'harga') &&
+                str_contains($message, $barang)
+            )
+            {
+                return response()->json([
+                    'reply' =>
+                    "Harga {$side->name}: {$side->price}"
+                ]);
+            }
+            }
 
         if (str_contains($message, 'suv'))
         {
