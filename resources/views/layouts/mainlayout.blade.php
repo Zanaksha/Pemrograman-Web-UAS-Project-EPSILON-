@@ -696,6 +696,9 @@
         outline: none;
         transition: border 0.15s;
     }
+    .bubble.bot {
+    white-space: pre-line; 
+    }
     .chat-input-area input:focus { border-color: #0066B1; }
     .send-btn {
         width: 38px;
@@ -949,6 +952,7 @@
             const box = document.getElementById('chat-box');
             const row = document.createElement('div');
             row.className = 'msg-row';
+            const formatted = text.replace(/\n/g, '<br>');
             row.innerHTML = `
                 <div class="bot-avatar"><img src="{{ asset('images/bmwchtbt.png') }}" alt=""></div>
                 <div class="bubble bot">${text}</div>`;
