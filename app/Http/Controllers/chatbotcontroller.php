@@ -57,7 +57,7 @@ class ChatbotController extends Controller
             {
                 return response()->json([
                     'reply' =>
-                    "BMW {$car->name}\n" .
+                    "EPSILON {$car->name}\n" .
                     "Category: {$car->category}\n" .
                     "Series: {$car->series}\n" .
                     "Drivetrain: {$car->drivetrain}"
