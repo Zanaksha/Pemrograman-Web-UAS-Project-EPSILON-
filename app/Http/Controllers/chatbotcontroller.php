@@ -83,6 +83,16 @@ class ChatbotController extends Controller
                         "Price : {$side->price}"
                 ]);
             }
+
+            if (str_contains($message, 'description') && str_contains($message, $barang)) {
+                return response()->json([
+                    'reply' =>
+                    "Item description \n" .
+                    "━━━━━━━━━━━━━━━━━━━━━━━━━━\n" .
+                    "Item        : {$side->name}\n" .
+                    "Description : {$side->description}\n"
+                ]);
+            }
         }
 
         if (str_contains($message, 'suv')) {
