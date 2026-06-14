@@ -65,7 +65,7 @@
                         <td>{{ $i + 1 }}</td>
                         <td>
                             @if($product->image)
-                                <img src="{{ $product->image }}" width="60" height="40" style="object-fit:cover; border-radius:4px;">
+                                <img src="{{ asset($product->image) }}" width="60" height="40" style="object-fit:cover; border-radius:4px;">
                             @endif
                         </td>
                         <td>{{ $product->name }}</td>
