@@ -9,7 +9,8 @@ use Illuminate\Support\Facades\Auth;
 class OrderController extends Controller
 {
     public function store(Request $request)
-    {
+    {   
+        \Log::info('Request data:', $request->all());
         if (!Auth::check()) {
             return response()->json(['error' => 'Silakan login terlebih dahulu!', 'redirect' => '/login'], 401);
         }
@@ -38,7 +39,8 @@ class OrderController extends Controller
     public function myOrders()
     {
         $orders = Order::where('user_id', Auth::id())->orderBy('created_at', 'desc')->get();
+        $warranties = \App\Models\Warranty::where('owner_email', Auth::user()->email)->get()->keyBy('car_model');
         Auth::user()->update(['last_seen' => now()]);
-        return view('my-orders', compact('orders'));
+        return view('my-orders', compact('orders', 'warranties'));
     }
 }

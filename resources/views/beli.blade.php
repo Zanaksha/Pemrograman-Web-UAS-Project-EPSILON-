@@ -198,7 +198,7 @@
             </div>
             <div class="form-group">
                 <label>No. Telepon</label>
-                <input type="text" id="f_telp" placeholder="">
+                <input type="text" id="f_telp" placeholder="" onchange="localStorage.setItem('telp', this.value)">
             </div>
         </div>
         <div class="form-row">
@@ -280,7 +280,7 @@
 </div>
 
 <script>
-    let state = { step: 1, car: '', price: '', pay: '' };
+    let state = { step: 1, car: '', price: '', pay: '', telp: '' };
 
     function selectCar(el, name, price) {
         document.querySelectorAll('.car-card').forEach(c => c.classList.remove('selected'));
@@ -309,6 +309,8 @@
                 document.getElementById('err2').style.display = 'block';
                 return;
             }
+            state.telp = document.getElementById('f_telp').value;
+            console.log('telp:', state.telp); // tambah di sini
         }
         if (n === 4) {
             if (!state.pay) {
@@ -325,6 +327,7 @@
         const kota  = document.getElementById('f_kota').value;
         const warna = document.getElementById('f_warna').value;
         const email = document.getElementById('f_email').value;
+        state.telp  = document.getElementById('f_telp').value; 
         document.getElementById('summaryBox').innerHTML = `
             <div class="summary-row"><span>Model</span><span>${state.car}</span></div>
             <div class="summary-row"><span>Warna</span><span>${warna}</span></div>
@@ -357,7 +360,7 @@
     function submitOrder() {
         const nama  = document.getElementById('f_nama').value;
         const email = document.getElementById('f_email').value;
-        const telp  = document.getElementById('f_telp').value;
+        const telp = state.telp;
         const kota  = document.getElementById('f_kota').value;
         const warna = document.getElementById('f_warna').value;
         const hargaAngka = parseInt(state.price.replace(/[^0-9]/g, ''));
@@ -417,39 +420,40 @@ function resetAll() {
         state.price = harga;
     }
 
-    function submitOrder() {
-    const nama  = document.getElementById('f_nama').value;
-    const ktp   = document.getElementById('f_ktp').value;
-    const email = document.getElementById('f_email').value;
-    const telp  = document.getElementById('f_telp').value;
-    const kota  = document.getElementById('f_kota').value;
-    const warna = document.getElementById('f_warna').value;
+//     function submitOrder() {
+//     alert('telp: ' + state.telp);
+//     const nama  = document.getElementById('f_nama').value;
+//     const ktp   = document.getElementById('f_ktp').value;
+//     const email = document.getElementById('f_email').value;
+//     const telp = localStorage.getItem('telp') || state.telp || '';
+//     const kota  = document.getElementById('f_kota').value;
+//     const warna = document.getElementById('f_warna').value;
 
-    fetch('/order', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
-        },
-        body: JSON.stringify({
-            nama, ktp, email, telp, kota, warna,
-            model: state.car,
-            harga: state.price,
-            pembayaran: state.pay
-        })
-    })
-    .then(res => res.json())
-    .then(data => {
-        if (data.success) {
-            document.getElementById('orderId').textContent = 'Order ID: ' + data.order_id;
-            document.getElementById('successDetail').textContent = state.car + ' — ' + state.price;
-            showStep(5);
-        }
-    })
-    .catch(err => {
-        alert('Gagal membuat order. Coba lagi!');
-    });
-}
+//     fetch('/order', {
+//         method: 'POST',
+//         headers: {
+//             'Content-Type': 'application/json',
+//             'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
+//         },
+//         body: JSON.stringify({
+//             nama, ktp, email, telp, kota, warna,
+//             model: state.car,
+//             harga: state.price,
+//             pembayaran: state.pay
+//         })
+//     })
+//     .then(res => res.json())
+//     .then(data => {
+//         if (data.success) {
+//             document.getElementById('orderId').textContent = 'Order ID: ' + data.order_id;
+//             document.getElementById('successDetail').textContent = state.car + ' — ' + state.price;
+//             showStep(5);
+//         }
+//     })
+//     .catch(err => {
+//         alert('Gagal membuat order. Coba lagi!');
+//     });
+// }
 });
 </script>
 

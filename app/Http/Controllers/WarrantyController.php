@@ -14,12 +14,18 @@ class WarrantyController extends Controller
 
     public function check(Request $request)
     {
-        $request->validate([
-            'vin' => 'required|string'
-        ]);
+        $vin = strtoupper($request->vin);
+        $email = $request->email;
+        $warranty = \App\Models\Warranty::where('vin', $vin)->first();
 
-        $warranty = Warranty::where('vin', strtoupper($request->vin))->first();
+        if (!$warranty) {
+            return back()->with('error', 'VIN tidak ditemukan.')->withInput();
+        }
 
-        return view('warranty', compact('warranty'));
+        if (strtolower($warranty->owner_email) !== strtolower($email)) {
+            return back()->with('error', 'Email tidak sesuai dengan pemilik VIN ini.')->withInput();
+        }
+
+        return view('warranty', compact('warranty'))->with('vin', $vin);
     }
 }

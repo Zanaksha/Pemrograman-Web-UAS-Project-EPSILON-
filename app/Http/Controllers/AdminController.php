@@ -150,7 +150,8 @@ class AdminController extends Controller
 
     public function warrantyCreate()
     {
-        return view('admin.warranties.create');
+        $orders = Order::where('status', 'confirmed')->where('type', 'car')->get();
+        return view('admin.warranties.create', compact('orders'));
     }
 
     public function warrantyStore(Request $request)
@@ -248,6 +249,13 @@ class AdminController extends Controller
     {
         Order::findOrFail($id)->delete();
         return redirect()->back()->with('success', 'Order berhasil dihapus!');
+    }
+
+    public function orderStatus(Request $request, $id)
+    {
+        $order = Order::findOrFail($id);
+        $order->update(['status' => $request->status]);
+        return redirect()->back()->with('success', 'Status updated!');
     }
     
 }

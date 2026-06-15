@@ -42,17 +42,33 @@
             @csrf
             <div class="row g-3">
                 <div class="col-12">
-                    <label class="form-label fw-semibold">VIN Number</label>
-                    <input type="text" name="vin" class="form-control" placeholder="e.g. WBA12345678901234" value="{{ old('vin') }}" required style="text-transform:uppercase; letter-spacing:2px;">
-                </div>
-                <div class="col-md-6">
-                    <label class="form-label fw-semibold">Owner Name</label>
-                    <input type="text" name="owner_name" class="form-control" value="{{ old('owner_name') }}" required>
-                </div>
-                <div class="col-md-6">
-                    <label class="form-label fw-semibold">Owner Email</label>
-                    <input type="email" name="owner_email" class="form-control" value="{{ old('owner_email') }}" required>
-                </div>
+                     <label class="form-label fw-semibold">VIN Number</label>
+                        <div class="input-group">
+                            <input type="text" name="vin" id="vinInput" class="form-control" placeholder="e.g. WBA12345678901234" value="{{ old('vin') }}" required style="text-transform:uppercase; letter-spacing:2px;">
+                            <button type="button" class="btn btn-secondary" onclick="generateVIN()">Generate VIN</button>
+                        </div>
+                    </div>
+
+                    <div class="col-12">
+                        <label class="form-label fw-semibold">Pilih dari Order</label>
+                        <select class="form-select" onchange="fillOwner(this)">
+                            <option value="">-- Pilih Pemesan --</option>
+                            @foreach($orders as $order)
+                            <option value="{{ $order->nama }}|{{ $order->email }}|{{ $order->model }}">
+                                {{ $order->nama }} - {{ $order->model }} ({{ $order->order_id }})
+                            </option>
+                            @endforeach
+                        </select>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="form-label fw-semibold">Owner Name</label>
+                        <input type="text" name="owner_name" id="ownerName" class="form-control" value="{{ old('owner_name') }}" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label fw-semibold">Owner Email</label>
+                        <input type="email" name="owner_email" id="ownerEmail" class="form-control" value="{{ old('owner_email') }}" required>
+                    </div>
                 <div class="col-md-6">
                     <label class="form-label fw-semibold">Car Model</label>
                     <select name="car_model" class="form-select">
@@ -101,6 +117,25 @@
         </form>
     </div>
 </div>
+
+<script>
+    function generateVIN() {
+        const chars = 'ABCDEFGHJKLMNPRSTUVWXYZ0123456789';
+        let vin = 'WBA';
+        for (let i = 0; i < 14; i++) {
+            vin += chars.charAt(Math.floor(Math.random() * chars.length));
+        }
+        document.getElementById('vinInput').value = vin;
+    }
+
+    function fillOwner(select) {
+        const val = select.value;
+        if (!val) return;
+        const parts = val.split('|');
+        document.getElementById('ownerName').value = parts[0];
+        document.getElementById('ownerEmail').value = parts[1];
+    }
+</script>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
 </body>
