@@ -52,6 +52,8 @@ Route::post('/warranties/check', [WarrantyController::class, 'check'])->name('wa
 
 Route::middleware(['admin'])->prefix('admin')->group(function () {
 
+    Route::get('/laporan', [AdminController::class, 'laporan'])->name('admin.laporan');
+
     Route::delete('/orders/{id}/delete', [AdminController::class, 'orderDestroy'])->name('admin.orders.destroy');
 
     Route::get('/', [AdminController::class, 'dashboard'])->name('admin.dashboard');

@@ -157,22 +157,13 @@ body{font-family:sans-serif;font-size:14px}
       <div class="col-lg-7">
         <h4 class="fw-bold">Check Your Warranty Status</h4>
         <p class="small" style="color:rgba(255,255,255,.6)">Enter your VIN to view your warranty information.</p>
-        <form action="/warranties/check" method="POST" style="max-width:480px">
-          @csrf
-          <div class="input-group mt-2">
-              <input type="text" name="vin" class="form-control" placeholder="Enter your VIN" value="{{ old('vin') }}" required/>
-              <button class="btn btn-primary px-4" type="submit">Check Status</button>
-          </div>
-          <div class="mt-2">
-              <input type="email" name="email" class="form-control" placeholder="Enter your email" style="background:rgba(255,255,255,.1); border:none; color:#fff;" required/>
-          </div>
-      </form>
-
-      @if(session('error'))
-        <div class="alert alert-danger mt-3" style="max-width:480px; background:rgba(220,53,69,0.2); border-color:rgba(220,53,69,0.5); color:#fff;">
-            ⚠️ {{ session('error') }}
-        </div>
-        @endif
+       <form action="/warranties/check" method="POST" style="max-width:480px">
+            @csrf
+            <div class="input-group mt-2">
+                <input type="text" name="vin" class="form-control" placeholder="Enter your VIN (e.g., WBA12345678901234)" value="{{ old('vin') }}" required/>
+                <button class="btn btn-primary px-4" type="submit">Check Status</button>
+            </div>
+        </form>
 
         @if(isset($warranty))
         <div class="mt-4 p-3 rounded" style="background:rgba(255,255,255,0.1); max-width:480px;">

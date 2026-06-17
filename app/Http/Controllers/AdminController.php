@@ -257,5 +257,43 @@ class AdminController extends Controller
         $order->update(['status' => $request->status]);
         return redirect()->back()->with('success', 'Status updated!');
     }
+
+    public function laporan()
+    {
+        $totalPendapatan = Order::where('status', 'confirmed')->sum('harga');
+        $totalOrder = Order::count();
+        $orderConfirmed = Order::where('status', 'confirmed')->count();
+        $orderPending = Order::where('status', 'pending')->count();
+        $orderCancelled = Order::where('status', 'cancelled')->count();
+        
+        $mobilTerlaris = Order::where('type', 'car')
+            ->where('status', 'confirmed')
+            ->select('model', \DB::raw('count(*) as total'))
+            ->groupBy('model')
+            ->orderBy('total', 'desc')
+            ->limit(5)
+            ->get();
+        
+        $produkTerlaris = Order::where('type', 'product')
+            ->where('status', 'confirmed')
+            ->select('model', \DB::raw('count(*) as total'))
+            ->groupBy('model')
+            ->orderBy('total', 'desc')
+            ->limit(5)
+            ->get();
+        
+        $orderPerBulan = Order::selectRaw('MONTH(created_at) as bulan, YEAR(created_at) as tahun, count(*) as total, sum(harga) as pendapatan')
+            ->groupBy('tahun', 'bulan')
+            ->orderBy('tahun', 'desc')
+            ->orderBy('bulan', 'desc')
+            ->limit(12)
+            ->get();
+
+        return view('admin.laporan', compact(
+            'totalPendapatan', 'totalOrder', 'orderConfirmed', 
+            'orderPending', 'orderCancelled', 'mobilTerlaris', 
+            'produkTerlaris', 'orderPerBulan'
+        ));
+    }
     
 }
