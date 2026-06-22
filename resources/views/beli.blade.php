@@ -2,6 +2,8 @@
 @section('title', 'Beli Online')
 @section('content')
 
+<meta name="csrf-token" content="{{ csrf_token() }}">
+
 <div style="height: 80px;"></div>
 
 <style>
@@ -359,11 +361,11 @@
 
     function submitOrder() {
         const nama  = document.getElementById('f_nama').value;
+        const ktp   = document.getElementById('f_ktp').value;
         const email = document.getElementById('f_email').value;
-        const telp = state.telp;
+        const telp  = document.getElementById('f_telp').value;
         const kota  = document.getElementById('f_kota').value;
         const warna = document.getElementById('f_warna').value;
-        const hargaAngka = parseInt(state.price.replace(/[^0-9]/g, ''));
 
         fetch('/order', {
             method: 'POST',
@@ -373,13 +375,14 @@
             },
             body: JSON.stringify({
                 nama: nama,
+                ktp: ktp,
                 email: email,
-                phone: telp,
+                telp: telp,
                 kota: kota,
-                model: state.car,
                 warna: warna,
-                harga: hargaAngka,
-                type: 'car'
+                model: state.car,
+                harga: state.price,
+                pembayaran: state.pay
             })
         })
         .then(res => res.json())
@@ -388,10 +391,51 @@
                 document.getElementById('orderId').textContent = 'Order ID: ' + data.order_id;
                 document.getElementById('successDetail').textContent = state.car + ' — ' + state.price;
                 showStep(5);
+            } else {
+                alert('Gagal membuat order. Coba lagi!');
             }
         })
-        .catch(err => alert('Terjadi kesalahan, coba lagi.'));
+        .catch(err => {
+            console.error(err);
+            alert('Terjadi kesalahan, coba lagi.');
+        });
     }
+
+    // function submitOrder() {
+    //     const nama  = document.getElementById('f_nama').value;
+    //     const email = document.getElementById('f_email').value;
+    //     const telp = state.telp;
+    //     const kota  = document.getElementById('f_kota').value;
+    //     const warna = document.getElementById('f_warna').value;
+    //     const hargaAngka = parseInt(state.price.replace(/[^0-9]/g, ''));
+
+    //     fetch('/order', {
+    //         method: 'POST',
+    //         headers: {
+    //             'Content-Type': 'application/json',
+    //             'X-CSRF-TOKEN': '{{ csrf_token() }}'
+    //         },
+    //         body: JSON.stringify({
+    //             nama: nama,
+    //             email: email,
+    //             phone: telp,
+    //             kota: kota,
+    //             model: state.car,
+    //             warna: warna,
+    //             harga: hargaAngka,
+    //             type: 'car'
+    //         })
+    //     })
+    //     .then(res => res.json())
+    //     .then(data => {
+    //         if (data.success) {
+    //             document.getElementById('orderId').textContent = 'Order ID: ' + data.order_id;
+    //             document.getElementById('successDetail').textContent = state.car + ' — ' + state.price;
+    //             showStep(5);
+    //         }
+    //     })
+    //     .catch(err => alert('Terjadi kesalahan, coba lagi.'));
+    // }
 function resetAll() {
     window.location.href = '/buycar';
 }

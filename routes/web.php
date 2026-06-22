@@ -10,8 +10,9 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\WarrantyController;
 use App\Http\Controllers\ChatbotController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\SearchController;
 
-    
+    Route::get('/search', [SearchController::class, 'index'])->name('search');
 
     Route::get('/produk-detail', function () {
     $produk = \App\Models\Product::where('name', request('produk', ''))->first();
@@ -52,6 +53,7 @@ Route::post('/warranties/check', [WarrantyController::class, 'check'])->name('wa
 
 Route::middleware(['admin'])->prefix('admin')->group(function () {
 
+    Route::get('/reports', [AdminController::class, 'reports'])->name('admin.reports');
     Route::get('/laporan', [AdminController::class, 'laporan'])->name('admin.laporan');
 
     Route::delete('/orders/{id}/delete', [AdminController::class, 'orderDestroy'])->name('admin.orders.destroy');

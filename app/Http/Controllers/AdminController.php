@@ -296,4 +296,54 @@ class AdminController extends Controller
         ));
     }
     
+    public function reports(Request $request)
+    {
+        $startDate = $request->start_date ?? now()->startOfMonth()->format('Y-m-d');
+        $endDate = $request->end_date ?? now()->format('Y-m-d');
+
+        $orders = Order::whereBetween('created_at', [$startDate, $endDate . ' 23:59:59'])
+                        ->orderBy('created_at', 'desc')
+                        ->get();
+
+        
+        $totalRevenue = $orders->sum(function ($order) {
+            return (float) preg_replace('/[^0-9]/', '', $order->harga);
+        });
+
+        $totalOrders = $orders->count();
+        $confirmedOrders = $orders->where('status', 'confirmed')->count();
+        $deliveredOrders = $orders->where('status', 'delivered')->count();
+        $pendingOrders = $orders->where('status', 'pending')->count();
+
+    
+        $chartData = Order::whereBetween('created_at', [$startDate, $endDate . ' 23:59:59'])
+                        ->get()
+                        ->groupBy(function ($order) {
+                            return $order->created_at->format('Y-m-d');
+                        })
+                        ->map(function ($group) {
+                            return [
+                                'count' => $group->count(),
+                                'revenue' => $group->sum(function ($order) {
+                                    return (float) preg_replace('/[^0-9]/', '', $order->harga);
+                                }),
+                            ];
+                        });
+
+        
+        $topModels = Order::whereBetween('created_at', [$startDate, $endDate . ' 23:59:59'])
+                        ->get()
+                        ->groupBy('model')
+                        ->map(function ($group) {
+                            return $group->count();
+                        })
+                        ->sortDesc()
+                        ->take(5);
+
+        return view('admin.reports', compact(
+        'orders', 'totalRevenue', 'totalOrders', 'confirmedOrders',
+        'deliveredOrders', 'pendingOrders', 'chartData', 'topModels',
+        'startDate', 'endDate'
+    ));
+    }
 }
