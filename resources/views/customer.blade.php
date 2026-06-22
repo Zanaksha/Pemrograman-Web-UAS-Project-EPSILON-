@@ -4,130 +4,7 @@
 
 @section('content')
 
-<style> 
 
-  .search-box {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-  margin-left: 75px
-    margin-top: 24px;
-  }
-
-  .search-field-wrap {
-    position: relative;
-    width: 100%;
-    max-width: 580px;
-    display: flex;
-    align-items: center;
-  }
-
-  .search-field-wrap input {
-    width: 100%;
-    padding: 14px 44px 14px 48px;
-    font-size: 15px;
-    border-radius: 50px;
-    border: 1.5px solid rgba(255, 255, 255, 0.3);
-    background: rgba(255, 255, 255, 0.15);
-    color: #fff;
-    outline: none;
-    transition: border 0.2s, background 0.2s;
-  }
-
-  .search-field-wrap input::placeholder {
-    color: rgba(255, 255, 255, 0.55);
-  }
-
-  .search-field-wrap input:focus {
-    border-color: rgba(255, 255, 255, 0.7);
-    background: rgba(255, 255, 255, 0.22);
-  }
-
-  .search-icon {
-    position: absolute;
-    left: 1px;
-    font-style: normal;
-    font-size: 16px;
-    color: rgba(255, 255, 255, 0.6);
-    pointer-events: none;
-  }
-
-  .search-clear {
-    position: absolute;
-    right: 14px;
-    background: rgba(255, 255, 255, 0.2);
-    border: none;
-    color: rgba(255, 255, 255, 0.8);
-    width: 24px;
-    height: 24px;
-    border-radius: 50%;
-    cursor: pointer;
-    font-size: 12px;
-    display: none;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .search-field-wrap input:not(:placeholder-shown) ~ .search-clear {
-    display: flex;
-  }
-
-
-  .search-suggestions {
-    width: 100%;
-    max-width: 580px;
-    background: #fff;
-    border-radius: 12px;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
-    overflow: hidden;
-    display: none;
-    margin-top: 8px;
-    z-index: 100;
-    position: absolute;
-    top: 100%;
-  }
-
-  .search-suggestions.active {
-    display: block;
-  }
-
-  .suggestion-item {
-    padding: 11px 18px;
-    font-size: 14px;
-    color: #333;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    border-bottom: 1px solid #f0f0f0;
-    transition: background 0.15s;
-  }
-
-  .suggestion-item:last-child {
-    border-bottom: none;
-  }
-
-  .suggestion-item:hover {
-    background: #f7f7f7;
-  }
-
-  .suggestion-tag {
-    font-size: 11px;
-    padding: 2px 8px;
-    border-radius: 20px;
-    margin-left: auto;
-    background: #e8f0fe;
-    color: #1a56db;
-    white-space: nowrap;
-  }
-
-  .suggestion-empty {
-    padding: 14px 18px;
-    font-size: 14px;
-    color: #888;
-  }
-
-</style>
 
     <link rel="stylesheet" href="{{ asset('css/cs.css') }}">
 
@@ -147,7 +24,7 @@
   <div class="search-box">
     <div class="search-field-wrap">
       <i class="search-icon">&#128269;</i>
-      <input type="text" id="searchInput" placeholder="Cari bantuan, layanan, atau pertanyaan..." autocomplete="off">
+      <input type="text" id="csSearchInput" placeholder="Cari bantuan, layanan, atau pertanyaan..." autocomplete="off">
       <button class="search-clear" id="searchClear" aria-label="Hapus">&#x2715;</button>
     </div>
     <div class="search-suggestions" id="searchSuggestions"></div>
@@ -249,9 +126,9 @@
   }
 
  
-  const input       = document.getElementById('searchInput');
+  const input       = document.getElementById('csSearchInput');
   const suggestions = document.getElementById('searchSuggestions');
-  const clearBtn    = document.getElementById('searchClear');
+  const clearBtn    = document.getElementById('csSearchClear');
 
   let debounceTimer;
 

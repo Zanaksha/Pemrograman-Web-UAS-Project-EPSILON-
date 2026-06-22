@@ -128,6 +128,7 @@ class ChatbotController extends Controller
             ]);
         }
 
+
         $chat = ChatbotResponse::whereRaw(
             'LOWER(?) LIKE CONCAT("%", LOWER(keyword), "%")',
             [$message]

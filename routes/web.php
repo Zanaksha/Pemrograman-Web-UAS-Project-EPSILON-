@@ -11,6 +11,7 @@ use App\Http\Controllers\WarrantyController;
 use App\Http\Controllers\ChatbotController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\SearchController;
+use App\Http\Controllers\CustomerSupportController;
 
     Route::get('/search', [SearchController::class, 'index'])->name('search');
 
@@ -50,6 +51,10 @@ Route::post('/order', [OrderController::class, 'store'])->name('order.store');
 
 Route::get('/warranties', [WarrantyController::class, 'index']);
 Route::post('/warranties/check', [WarrantyController::class, 'check'])->name('warranty.check');
+
+Route::get('/support', [CustomerSupportController::class, 'index'])->name('support.index');
+
+Route::get('/support/search', [CustomerSupportController::class, 'search'])->name('support.searchsupport');
 
 Route::middleware(['admin'])->prefix('admin')->group(function () {
 
@@ -173,9 +178,7 @@ Route::get('/shop', function () {
 //     return view('buycar'); 
 // });
 
-Route::get('/customer', function () { 
-    return view('customer'); 
-});
+Route::get('/customer', [CustomerSupportController::class, 'index']);
 
 Route::get('/contactinfo', function () { 
     return view('contactinfo'); 
