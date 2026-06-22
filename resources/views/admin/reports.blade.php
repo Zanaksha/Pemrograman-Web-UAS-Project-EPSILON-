@@ -94,12 +94,12 @@
 
     {{-- Chart + Top Models --}}
     <div class="row g-4 mb-4">
-        <div class="col-lg-8">
+        <!-- <div class="col-lg-8">
             <div class="card border-0 shadow-sm p-4">
                 <h6 class="fw-bold mb-3">Sales Trend</h6>
                 <canvas id="salesChart" height="100"></canvas>
             </div>
-        </div>
+        </div> -->
         <div class="col-lg-4">
             <div class="card border-0 shadow-sm p-4">
                 <h6 class="fw-bold mb-3">Top Selling Models</h6>

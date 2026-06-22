@@ -767,12 +767,12 @@
                     </li>
                 </ul>
 
-                <form action="/search" method="GET" style="margin:0;">
+                <form action="/search" method="GET" style="margin-right:50px;"> 
                     <div class="search-wrap">
                         <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
                         </svg>
-                        <input type="text" name="q" id="searchInput" placeholder="Cari model, dealer..."/>
+                        <input type="text" name="q" id="searchInput" placeholder="Cari model, dealer..." />
                     </div>
                 </form>
 
