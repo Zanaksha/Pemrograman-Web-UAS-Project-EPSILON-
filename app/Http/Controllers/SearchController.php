@@ -8,25 +8,19 @@ use App\Models\Product;
 
 class SearchController extends Controller
 {
-    public function index(Request $request)
-    {
-        $query = $request->input('q');
+public function index(Request $request)
+{
+    $query = $request->input('q');
 
-        $cars = collect();
-        $products = collect();
+    $cars = collect();
+    $products = collect();
 
-        if ($query) {
-            $cars = CarModel::where('name', 'like', "%{$query}%")
-                ->orWhere('category', 'like', "%{$query}%")
-                ->orWhere('series', 'like', "%{$query}%")
-                ->get();
+    if ($query) {
+        $cars = CarModel::where('name', 'like', "%{$query}%")->get();
 
-            $products = Product::where('name', 'like', "%{$query}%")
-                ->orWhere('category', 'like', "%{$query}%")
-                ->orWhere('description', 'like', "%{$query}%")
-                ->get();
-        }
-
-        return view('search', compact('cars', 'products', 'query'));
+        $products = Product::where('name', 'like', "%{$query}%")->get();
     }
+
+    return view('search', compact('cars', 'products', 'query'));
+}
 }

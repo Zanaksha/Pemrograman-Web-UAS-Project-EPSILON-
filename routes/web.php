@@ -148,7 +148,7 @@ Route::get('/x3', function () {
     return view('x3'); 
 });
 
-Route::get('/7', function () { 
+Route::get('/7-series', function () { 
     return view('7'); 
 });
 
@@ -160,6 +160,25 @@ Route::get('/m3', function () {
     return view('m3');
 });
 
+Route::get('/m4', function () { 
+    return view('m4');
+});
+
+Route::get('/4-gran-coupe', function () { 
+    return view('4');
+});
+
+Route::get('/4-convertible', function () { 
+    return view('4convert');
+});
+
+Route::get('/3-series', function () { 
+    return view('3');
+});
+
+Route::get('/5-series', function () { 
+    return view('5series');
+});
 // Route::get('/choosebuy', function () { 
 //     return view('choosebuy'); 
 // });
