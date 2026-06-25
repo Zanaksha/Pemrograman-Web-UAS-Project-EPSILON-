@@ -189,7 +189,7 @@
     }
 </style>
 
-<div class="search-page" style="margin-top: 80px;">
+<div class="search-page" style="margin-top: 5px;">
     <div class="search-container">
 
         <div class="search-header">

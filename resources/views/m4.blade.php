@@ -51,7 +51,7 @@
     <span>M3</span>
   </div>
 
-  <h1>M3</h1>
+  <h1>M4</h1>
 
   <p>
     High-performance coupe dengan desain agresif dan tenaga besar.
@@ -92,21 +92,17 @@
 
     <!-- WHITE -->
     <button class="rounded-circle border border-2 border-dark"
-    style="width:20px; height:20px; background:green;"
-    onclick="changeCar('green')">
+    style="width:20px; height:20px; background:white;"
+    onclick="changeCar('white')">
     </button>
 
     <!-- BLACK -->
     <button class="rounded-circle border border-2 border-dark"
-    style="width:20px; height:20px; background:black;"
-    onclick="changeCar('black')">
+    style="width:20px; height:20px; background:blue;"
+    onclick="changeCar('blue')">
     </button>
 
-    <!-- RED -->
-    <button class="rounded-circle border border-2 border-dark"
-    style="width:20px; height:20px; background:white;"
-    onclick="changeCar('white')">
-    </button>
+    
 
   </div>
 
@@ -201,9 +197,9 @@
 // =======================
 
 let currentImages = [
-  "{{ asset('images/m3green1.png') }}",
-  "{{ asset('images/m3green2.png') }}",
-  "{{ asset('images/m3green3.png') }}"
+  "{{ asset('images/m4white1.png') }}",
+  "{{ asset('images/m4white2.png') }}",
+  "{{ asset('images/m4white3.png') }}"
 ];
 
 let index = 0;
@@ -289,20 +285,20 @@ function changeCar(color){
     if(color === 'white'){
 
         currentImages = [
-          "{{ asset('images/m3white1.png') }}",
-          "{{ asset('images/m3white2.png') }}",
-          "{{ asset('images/m3white3.png') }}"
+          "{{ asset('images/m4white1.png') }}",
+          "{{ asset('images/m4white2.png') }}",
+          "{{ asset('images/m4white3.png') }}"
         ];
 
     }
 
     // BLACK
-    if(color === 'black'){
+    if(color === 'blue'){
 
         currentImages = [
-          "{{ asset('images/m3black1.png') }}",
-          "{{ asset('images/m3black2.png') }}",
-          "{{ asset('images/m3black3.png') }}"
+          "{{ asset('images/m4blue1.png') }}",
+          "{{ asset('images/m4blue2.png') }}",
+          "{{ asset('images/m4blue3.png') }}"
         ];
 
     }

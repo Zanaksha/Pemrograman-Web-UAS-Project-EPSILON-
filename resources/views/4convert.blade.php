@@ -51,7 +51,7 @@
     <span>M3</span>
   </div>
 
-  <h1>M3</h1>
+  <h1>4 Convertible</h1>
 
   <p>
     High-performance coupe dengan desain agresif dan tenaga besar.
@@ -92,8 +92,8 @@
 
     <!-- WHITE -->
     <button class="rounded-circle border border-2 border-dark"
-    style="width:20px; height:20px; background:green;"
-    onclick="changeCar('green')">
+    style="width:20px; height:20px; background:white;"
+    onclick="changeCar('white')">
     </button>
 
     <!-- BLACK -->
@@ -104,8 +104,8 @@
 
     <!-- RED -->
     <button class="rounded-circle border border-2 border-dark"
-    style="width:20px; height:20px; background:white;"
-    onclick="changeCar('white')">
+    style="width:20px; height:20px; background:blue;"
+    onclick="changeCar('blue')">
     </button>
 
   </div>
@@ -201,9 +201,9 @@
 // =======================
 
 let currentImages = [
-  "{{ asset('images/m3green1.png') }}",
-  "{{ asset('images/m3green2.png') }}",
-  "{{ asset('images/m3green3.png') }}"
+  "{{ asset('images/4whiteup1.png') }}",
+  "{{ asset('images/4whiteup2.png') }}",
+  "{{ asset('images/4whiteup3.png') }}"
 ];
 
 let index = 0;
@@ -289,9 +289,9 @@ function changeCar(color){
     if(color === 'white'){
 
         currentImages = [
-          "{{ asset('images/m3white1.png') }}",
-          "{{ asset('images/m3white2.png') }}",
-          "{{ asset('images/m3white3.png') }}"
+          "{{ asset('images/4whiteup1.png') }}",
+          "{{ asset('images/4whiteup2.png') }}",
+          "{{ asset('images/4whiteup3.png') }}"
         ];
 
     }
@@ -300,20 +300,20 @@ function changeCar(color){
     if(color === 'black'){
 
         currentImages = [
-          "{{ asset('images/m3black1.png') }}",
-          "{{ asset('images/m3black2.png') }}",
-          "{{ asset('images/m3black3.png') }}"
+          "{{ asset('images/4blackup1.png') }}",
+          "{{ asset('images/4blackup2.png') }}",
+          "{{ asset('images/4blackup3.png') }}"
         ];
 
     }
 
-    // RED
-    if(color === 'red'){
+    // BLUE
+    if(color === 'blue'){
 
         currentImages = [
-          "{{ asset('images/i4red1.png') }}",
-          "{{ asset('images/i4red2.png') }}",
-          "{{ asset('images/i4red3.png') }}"
+          "{{ asset('images/4blueup1.png') }}",
+          "{{ asset('images/4blueup2.png') }}",
+          "{{ asset('images/4blueup3.png') }}"
         ];
 
     }
