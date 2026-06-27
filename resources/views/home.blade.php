@@ -24,8 +24,6 @@
   z-index: 2;
 }
 
-
-
 .anima {
     position: absolute;
     top: 0;
@@ -43,23 +41,10 @@
 }
 
 @keyframes slides {
-
-  0%, 30% {
-    transform: translateX(0);
-  }
-
-  33%, 63% {
-    transform: translateX(-33.333%);
-  }
-
-  66%, 96% {
-    transform: translateX(-66.666%);
-  }
-
-  100% {
-    transform: translateX(0);
-  }
-
+  0%, 30% { transform: translateX(0); }
+  33%, 63% { transform: translateX(-33.333%); }
+  66%, 96% { transform: translateX(-66.666%); }
+  100% { transform: translateX(0); }
 }
 
 .bg-video {
@@ -80,8 +65,6 @@
   padding-top: 30px;
 }
 
-/* navbar */
-
 .navbar .nav-link,
 .navbar:hover {
   color: rgb(255, 255, 255);
@@ -92,7 +75,6 @@
   color: rgb(255, 255, 255);
   margin-right: 15px;
 }
-
 
 .dropdown {
   position: relative;
@@ -142,8 +124,6 @@
   width: 70px;
 }
 
-/* teks dihomepage bagian atas */
-
 .okke {
   letter-spacing: 3px;
   font-size: 14.4px;
@@ -152,7 +132,7 @@
 }
 
 .hero-title {
-  font-size: 5rem;
+  font-size: 80px;
   font-weight: 800;
   line-height: 1;
   margin-bottom: 20px;
@@ -160,7 +140,7 @@
 }
 
 .hero-text {
-  font-size: 1.1rem;
+  font-size: 17.6px;
   max-width: 520px;
   color: #f0f0f0;
   margin-bottom: 30px;
@@ -179,7 +159,6 @@
   background: #e9e9e9;
 }
 
-/* why epsilon */
 .about {
   background: #f8f8f8;
   padding: 100px 0;
@@ -193,7 +172,6 @@
 .slide-box {
   width: 85%;
   margin: 50px auto 0;
-
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -205,14 +183,14 @@
 }
 
 .slide-text h2 {
-  font-size: 3rem;
+  font-size: 48px;
   font-weight: 800;
   margin-bottom: 20px;
   color: #111;
 }
 
 .slide-text p {
-  font-size: 1rem;
+  font-size: 16px;
   line-height: 1.8;
   color: #666;
   max-width: 500px;
@@ -236,7 +214,6 @@
   border-radius: 50%;
   background: white;
   box-shadow: 0 5px 20px rgba(0, 0, 0, .15);
-
   opacity: 1;
   top: 50%;
   transform: translateY(-50%);
@@ -278,32 +255,17 @@
   background-color: #dc3545;
 }
 
-
-
 @media (max-width: 992px) {
-
   .slide-box {
     width: 90%;
     flex-direction: column;
     text-align: center;
     gap: 30px;
   }
-
-  .slide-text p {
-    margin: auto;
-  }
-
-  .slide-text h2 {
-    font-size: 35.2px;
-  }
-
-  .slide-image img {
-    height: 320px;
-  }
-
-  .custom-arrow {
-    display: none;
-  }
+  .slide-text p { margin: auto; }
+  .slide-text h2 { font-size: 35.2px; }
+  .slide-image img { height: 320px; }
+  .custom-arrow { display: none; }
 }
 
 * {
@@ -312,7 +274,6 @@
   box-sizing: border-box;
 }
 
-/* featured model */
 .fmodel {
   padding: 100px 0;
   background: white;
@@ -320,7 +281,7 @@
 
 .section-title {
   text-align: center;
-  font-size: 3rem;
+  font-size: 48px;
   font-weight: 800;
   margin-bottom: 10px;
 }
@@ -353,7 +314,7 @@
 }
 
 .model-card-body h3 {
-  font-size: 1.4rem;
+  font-size: 22.4px;
   font-weight: 700;
 }
 
@@ -367,8 +328,6 @@
   color: black;
 }
 
-/* next */
-
 .why-epsilon {
   background: white;
   padding: 100px 0;
@@ -379,6 +338,7 @@
   text-decoration: none;
   font-weight: 600;
 }
+
 .feature-box {
   background: white;
   border-radius: 18px;
@@ -393,21 +353,18 @@
 }
 
 .feature-icon {
-  font-size: 2rem;
+  font-size: 32px;
   margin-bottom: 15px;
 }
 
 .feature-box h3 {
-  font-size: 1.3rem;
+  font-size: 20.8px;
   margin-bottom: 10px;
 }
 
 .feature-box p {
   color: #777;
 }
-
-
-/* footer */
 
 .site-footer {
   background: #0f0f0f;
@@ -437,7 +394,7 @@
 .footer-col h4,
 .footer-social h4 {
   margin-bottom: 15px;
-  font-size: 1.1rem;
+  font-size: 17.6px;
 }
 
 .footer-col a {
@@ -489,29 +446,81 @@
 }
 
 @media(max-width:992px) {
+  .hero-title { font-size: 48px; }
+  .hero-image-frame { display: none; }
+  .section-title { font-size: 35.2px; }
+  .footer-top { flex-direction: column; }
+  .footer-bottom { flex-direction: column; text-align: center; }
+}
 
-  .hero-title {
-    font-size: 3rem;
-  }
-
-  .hero-image-frame {
-    display: none;
-  }
-
-  .section-title {
-    font-size: 2.2rem;
-  }
-
-  .footer-top {
-    flex-direction: column;
-  }
-
-  .footer-bottom {
-    flex-direction: column;
-    text-align: center;
-  }
+#preloader {
+  position: fixed;
+  inset: 0;
+  background: #000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  transition: opacity 0.6s ease, visibility 0.6s ease;
+}
+#preloader.hide {
+  opacity: 0;
+  visibility: hidden;
+}
+.pre-tagline {
+  letter-spacing: 5px;
+  font-size: 11px;
+  font-weight: 600;
+  color: #666;
+  text-transform: uppercase;
+  opacity: 0;
+  transform: translateY(10px);
+  animation: fadeUp 0.6s ease 0.2s forwards;
+}
+.pre-title {
+  font-size: 56px;
+  font-weight: 800;
+  color: #fff;
+  letter-spacing: 8px;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeUp 0.7s ease 0.5s forwards;
+  margin: 8px 0 32px;
+}
+.pre-line {
+  width: 0;
+  height: 2px;
+  background: #fff;
+  animation: expandLine 0.8s ease 1s forwards;
+}
+.pre-sub {
+  font-size: 11px;
+  letter-spacing: 4px;
+  color: #444;
+  text-transform: uppercase;
+  opacity: 0;
+  animation: fadeIn 0.5s ease 1.6s forwards;
+  margin-top: 20px;
+}
+@keyframes fadeUp {
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes expandLine {
+  to { width: 120px; }
+}
+@keyframes fadeIn {
+  to { opacity: 1; }
 }
 </style>
+
+
+  <div id="preloader">
+    <p class="pre-tagline">Performance Series</p>
+    <h1 class="pre-title">EPSILON</h1>
+    <div class="pre-line"></div>
+    <p class="pre-sub">Loading experience&hellip;</p>
+  </div>
       
   <section class="hero">
 
@@ -744,93 +753,22 @@
   
 
 
-  <script>
-
-    const reviews = [
-
-      {
-        text: "Not an instant hitter like the cars that came before it, but a considerably greater all-rounder awaits those willing to give it time",
-        source: "TopGear",
-        date: "10/2019",
-        rating: "9/10",
-        link: "https://www.topgear.com/car-reviews/bmw/m4-competition"
-      },
-
-      {
-        text: "A sharp, powerful coupe with excellent balance and daily usability.",
-        source: "Car and Driver",
-        date: "03/2024",
-        rating: "8.8/10",
-        link: "https://www.caranddriver.com"
-      }
-
-    ];
-
-    let index = 0;
-
-    const reviewText =
-      document.getElementById("reviewText");
-
-    const reviewSource =
-      document.getElementById("reviewSource");
-
-    const reviewDate =
-      document.getElementById("reviewDate");
-
-    const reviewRating =
-      document.getElementById("reviewRating");
-
-    const reviewStars =
-      document.getElementById("reviewStars");
-
-    function updateReview() {
-
-      const review = reviews[index];
-
-      reviewText.textContent =
-        `"${review.text}"`;
-
-      reviewSource.textContent =
-        review.source;
-
-      reviewDate.textContent =
-        review.date;
-
-      reviewRating.textContent =
-        review.rating;
-
-      reviewStars.href =
-        review.link;
-
+<script>
+  function hidePreloader() {
+    const el = document.getElementById('preloader');
+    if (el) {
+      setTimeout(() => {
+        el.classList.add('hide');
+      }, 3000);
     }
+  }
 
-    document.getElementById("nextReview")
-      .onclick = () => {
-
-        index =
-          (index + 1)
-          % reviews.length;
-
-        updateReview();
-
-      };
-
-    document.getElementById("prevReview")
-      .onclick = () => {
-
-        index =
-          (index - 1 + reviews.length)
-          % reviews.length;
-
-        updateReview();
-
-      };
-
-    updateReview();
-
-  </script>
-
-
+  if (document.readyState === 'complete') {
+    hidePreloader();
+  } else {
+    window.addEventListener('load', hidePreloader);
+  }
+</script>
 
 
 @endsection
