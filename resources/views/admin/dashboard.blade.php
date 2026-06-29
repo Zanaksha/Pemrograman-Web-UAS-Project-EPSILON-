@@ -47,6 +47,7 @@
     <a href="/admin/orders"><i class="bi bi-receipt me-2"></i> Orders</a>
     <a href="/admin/warranties"><i class="bi bi-shield-check me-2"></i> Warranties</a>
     <a href="/admin/reports" class="active"><i class="bi bi-graph-up me-2"></i> Sales Report</a>
+    <a href="/admin/spareparts"><i class="bi bi-gear me-2"></i> Spareparts</a>
     <a href="/admin/messages"><i class="bi bi-envelope me-2"></i> Messages</a>
     <hr style="border-color:#222; margin:10px 24px;">
     <a href="/"><i class="bi bi-house me-2"></i> Back to Website</a>

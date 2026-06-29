@@ -12,6 +12,11 @@ use App\Http\Controllers\ChatbotController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\CustomerSupportController;
+use App\Http\Controllers\SparepartController;
+
+
+Route::get('/spareparts', [SparepartController::class, 'index']);
+Route::get('/spareparts/{id}', [SparepartController::class, 'show']);
 
     Route::get('/search', [SearchController::class, 'index'])->name('search');
 
@@ -57,6 +62,13 @@ Route::get('/support', [CustomerSupportController::class, 'index'])->name('suppo
 Route::get('/support/search', [CustomerSupportController::class, 'search'])->name('support.searchsupport');
 
 Route::middleware(['admin'])->prefix('admin')->group(function () {
+
+    Route::get('/spareparts', [AdminController::class, 'spareparts'])->name('admin.spareparts');
+    Route::get('/spareparts/create', [AdminController::class, 'sparepartCreate'])->name('admin.spareparts.create');
+    Route::post('/spareparts', [AdminController::class, 'sparepartStore'])->name('admin.spareparts.store');
+    Route::get('/spareparts/{id}/edit', [AdminController::class, 'sparepartEdit'])->name('admin.spareparts.edit');
+    Route::put('/spareparts/{id}', [AdminController::class, 'sparepartUpdate'])->name('admin.spareparts.update');
+    Route::delete('/spareparts/{id}', [AdminController::class, 'sparepartDestroy'])->name('admin.spareparts.destroy');
 
     Route::get('/reports', [AdminController::class, 'reports'])->name('admin.reports');
     Route::get('/laporan', [AdminController::class, 'laporan'])->name('admin.laporan');

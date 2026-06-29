@@ -9,6 +9,7 @@ use App\Models\Message;
 use App\Models\Warranty;
 use App\Models\ServiceHistory;
 use App\Models\Order;
+use App\Models\Sparepart; 
 
 class AdminController extends Controller
 {
@@ -345,5 +346,47 @@ class AdminController extends Controller
         'deliveredOrders', 'pendingOrders', 'chartData', 'topModels',
         'startDate', 'endDate'
     ));
+    }
+
+        public function spareparts()
+    {
+        $spareparts = Sparepart::all();
+        return view('admin.spareparts.index', compact('spareparts'));
+    }
+
+    public function sparepartCreate()
+    {
+        return view('admin.spareparts.create');
+    }
+
+    public function sparepartStore(Request $request)
+    {
+        $request->validate([
+            'name'     => 'required',
+            'category' => 'required',
+            'price'    => 'required|numeric',
+            'stock'    => 'required|integer',
+        ]);
+        Sparepart::create($request->all());
+        return redirect()->route('admin.spareparts')->with('success', 'Sparepart berhasil ditambahkan!');
+    }
+
+    public function sparepartEdit($id)
+    {
+        $sparepart = Sparepart::findOrFail($id);
+        return view('admin.spareparts.edit', compact('sparepart'));
+    }
+
+    public function sparepartUpdate(Request $request, $id)
+    {
+        $sparepart = Sparepart::findOrFail($id);
+        $sparepart->update($request->all());
+        return redirect()->route('admin.spareparts')->with('success', 'Sparepart berhasil diupdate!');
+    }
+
+    public function sparepartDestroy($id)
+    {
+        Sparepart::findOrFail($id)->delete();
+        return redirect()->route('admin.spareparts')->with('success', 'Sparepart berhasil dihapus!');
     }
 }
