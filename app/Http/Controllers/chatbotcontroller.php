@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\ChatbotResponse;
 use App\Models\CarModel;
 use App\Models\Product;
+use App\Models\Faq;
 
 class ChatbotController extends Controller
 {
@@ -20,6 +21,7 @@ class ChatbotController extends Controller
 
         $cars = CarModel::all();
         $sides = Product::all();
+        $faqs = Faq::all();
 
         foreach ($cars as $car) {
             $model = strtolower($car->name);
@@ -93,6 +95,33 @@ class ChatbotController extends Controller
                     "Description : {$side->description}\n"
                 ]);
             }
+        }
+
+        $bestMatch = null;
+        $bestScore = 0;
+
+        foreach ($faqs as $ask) {
+            $stopWords = ['how', 'can', 'what', 'when', 'where', 'will', 'does', 'have', 'your', 'with', 'that', 'this', 'from'];
+            $words = explode(' ', strtolower($ask->question));
+            $matchCount = 0;
+
+            foreach ($words as $word) {
+                $word = trim($word, '?.,!');
+                if (strlen($word) > 3 && !in_array($word, $stopWords) && str_contains($message, $word)) {
+                    $matchCount++;
+                }
+            }
+
+            if ($matchCount > $bestScore) {
+                $bestScore = $matchCount;
+                $bestMatch = $ask;
+            }
+        }
+
+        if ($bestScore >= 1 && $bestMatch) {
+            return response()->json([
+                'reply' => "{$bestMatch->answer}"
+            ]);
         }
 
         if (str_contains($message, 'suv')) {
