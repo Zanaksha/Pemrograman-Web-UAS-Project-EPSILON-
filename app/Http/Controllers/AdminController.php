@@ -167,7 +167,13 @@ class AdminController extends Controller
             'warranty_start' => 'required|date',
             'warranty_end'   => 'required|date',
         ]);
-        Warranty::create($request->all());
+        Warranty::create($request->except('order_id'));
+
+        // Kalau warranty ini dibuat dari order tertentu, simpan VIN ke order itu juga
+        if ($request->filled('order_id')) {
+            Order::where('id', $request->order_id)->update(['vin' => $request->vin]);
+        }
+
         return redirect()->route('admin.warranties')->with('success', 'Warranty berhasil ditambahkan!');
     }
 
@@ -226,6 +232,10 @@ class AdminController extends Controller
     {
         $order = Order::findOrFail($id);
 
+        if (!empty($order->vin)) {
+            return redirect()->route('admin.orders')->with('success', 'Warranty untuk order ini sudah ada. VIN: ' . $order->vin);
+        }
+
         $vin = 'WBA' . strtoupper(substr(md5($order->order_id), 0, 14));
 
         $warranty = Warranty::create([
@@ -236,12 +246,12 @@ class AdminController extends Controller
             'car_year'       => date('Y'),
             'purchase_date'  => $order->created_at->format('Y-m-d'),
             'warranty_start' => $order->created_at->format('Y-m-d'),
-            'warranty_end'   => $order->created_at->addYears(4)->format('Y-m-d'),
+            'warranty_end'   => $order->created_at->copy()->addYears(4)->format('Y-m-d'),
             'status'         => 'active',
             'notes'          => 'Auto-generated from Order ' . $order->order_id,
         ]);
 
-        $order->update(['vin' => $vin, 'status' => 'delivered']);
+        $order->update(['vin' => $vin]);
 
         return redirect()->route('admin.orders')->with('success', 'Warranty berhasil digenerate! VIN: ' . $vin);
     }
@@ -255,14 +265,47 @@ class AdminController extends Controller
     public function orderStatus(Request $request, $id)
     {
         $order = Order::findOrFail($id);
+        $oldStatus = $order->status;
         $order->update(['status' => $request->status]);
+
+        // Hanya proses sekali, saat status BERUBAH menjadi confirmed (hindari stok kepotong dobel)
+        if ($request->status === 'confirmed' && $oldStatus !== 'confirmed') {
+            // Kurangi stok sparepart/product (mobil tidak pakai stok)
+            if ($order->type === 'sparepart') {
+                $item = \App\Models\Sparepart::where('name', $order->model)->first();
+                if ($item && $item->stock > 0) {
+                    $item->decrement('stock');
+                }
+            } elseif ($order->type === 'product') {
+                $item = \App\Models\Product::where('name', $order->model)->first();
+                if ($item && $item->stock > 0) {
+                    $item->decrement('stock');
+                }
+            }
+        }
+
+        // Order yang SUDAH confirmed lalu diubah ke status lain (mis. cancelled) -> stok dikembalikan
+        if ($oldStatus === 'confirmed' && $request->status !== 'confirmed') {
+            if ($order->type === 'sparepart') {
+                $item = \App\Models\Sparepart::where('name', $order->model)->first();
+                if ($item) {
+                    $item->increment('stock');
+                }
+            } elseif ($order->type === 'product') {
+                $item = \App\Models\Product::where('name', $order->model)->first();
+                if ($item) {
+                    $item->increment('stock');
+                }
+            }
+        }
+
         return redirect()->back()->with('success', 'Status updated!');
     }
 
     public function laporan()
     {
         $totalPendapatan = Order::where('status', 'confirmed')->sum('harga');
-        $totalOrder = Order::count();
+        $totalOrder = Order::where('status', 'confirmed')->count();
         $orderConfirmed = Order::where('status', 'confirmed')->count();
         $orderPending = Order::where('status', 'pending')->count();
         $orderCancelled = Order::where('status', 'cancelled')->count();
@@ -307,17 +350,18 @@ class AdminController extends Controller
                         ->get();
 
         
-        $totalRevenue = $orders->sum(function ($order) {
+        $totalRevenue = $orders->where('status', 'confirmed')->sum(function ($order) {
             return (float) preg_replace('/[^0-9]/', '', $order->harga);
         });
 
-        $totalOrders = $orders->count();
+        $totalOrders = $orders->where('status', 'confirmed')->count();
         $confirmedOrders = $orders->where('status', 'confirmed')->count();
         $deliveredOrders = $orders->where('status', 'delivered')->count();
         $pendingOrders = $orders->where('status', 'pending')->count();
 
     
         $chartData = Order::whereBetween('created_at', [$startDate, $endDate . ' 23:59:59'])
+                        ->where('status', 'confirmed')
                         ->get()
                         ->groupBy(function ($order) {
                             return $order->created_at->format('Y-m-d');
@@ -333,6 +377,7 @@ class AdminController extends Controller
 
         
         $topModels = Order::whereBetween('created_at', [$startDate, $endDate . ' 23:59:59'])
+                        ->where('status', 'confirmed')
                         ->get()
                         ->groupBy('model')
                         ->map(function ($group) {

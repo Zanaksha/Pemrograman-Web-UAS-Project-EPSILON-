@@ -28,12 +28,14 @@
          @if($order->status == 'confirmed')
 <div class="alert alert-success mt-3 mb-0">
     ✅ Pesanan kamu telah dikonfirmasi! Tim kami akan segera menghubungi kamu.
-    @php $warranty = $warranties->get($order->model) ?? $warranties->get('BMW ' . $order->model) ?? null; @endphp
-    @if($warranty)
+    @if($order->vin)
+    @php $warranty = $warranties->get($order->vin); @endphp
     <div class="mt-2 p-2" style="background:rgba(255,255,255,0.5); border-radius:8px;">
         🛡️ <strong>VIN Number:</strong> 
-        <span style="font-family:monospace; letter-spacing:2px; font-size:16px;">{{ $warranty->vin }}</span>
+        <span style="font-family:monospace; letter-spacing:2px; font-size:16px;">{{ $order->vin }}</span>
+        @if($warranty)
         <br><small>Warranty berlaku hingga: <strong>{{ \Carbon\Carbon::parse($warranty->warranty_end)->format('d M Y') }}</strong></small>
+        @endif
     </div>
     @endif
 </div>

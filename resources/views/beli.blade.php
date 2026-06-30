@@ -7,39 +7,110 @@
 <div style="height: 80px;"></div>
 
 <style>
-    .buy-wrap { max-width: 900px; margin: 0 auto; padding: 40px 20px 80px; }
+    .buy-wrap { 
+        max-width: 900px; 
+        margin: 0 auto; 
+        padding: 40px 20px 80px; }
 
-    .steps { display: flex; align-items: center; margin-bottom: 40px; }
-    .step-item { display: flex; align-items: center; gap: 8px; flex: 1; }
+    .steps { 
+        display: flex; 
+        align-items: center; 
+        margin-bottom: 40px; }
+
+    .step-item { 
+        display: flex; 
+        align-items: center; 
+        gap: 8px; flex: 1; }
+
     .step-num {
-        width: 30px; height: 30px; border-radius: 50%;
-        border: 2px solid #333; display: flex; align-items: center;
-        justify-content: center; font-size: 13px; font-weight: 600;
-        color: #666; background: #fff; flex-shrink: 0; transition: all 0.3s;
+        width: 30px; 
+        height: 30px; 
+        border-radius: 50%;
+        border: 2px solid #333; 
+        display: flex; 
+        align-items: center;
+        justify-content: center; 
+        font-size: 13px; 
+        font-weight: 600;
+        color: #666; 
+        background: #fff; 
+        flex-shrink: 0; 
+        transition: all 0.3s;
     }
-    .step-num.active { background: #0066cc; border-color: #0066cc; color: #fff; }
-    .step-num.done { background: #1D9E75; border-color: #1D9E75; color: #fff; }
-    .step-label { font-size: 13px; color: #999; }
-    .step-label.active { color: #111; font-weight: 600; }
-    .step-line { flex: 1; height: 1px; background: #e0e0e0; margin: 0 8px; }
-    .step-line.done { background: #1D9E75; }
 
-    .panel { display: none; }
-    .panel.active { display: block; }
+    .step-num.active { 
+        background: #0066cc; 
+        border-color: #0066cc; 
+        color: #fff; }
 
-    .section-title { font-size: 15px; color: #666; margin-bottom: 20px; }
+    .step-num.done { 
+        background: #1D9E75; 
+        border-color: #1D9E75; 
+        color: #fff; }
+        
+    .step-label { 
+        font-size: 13px; 
+        color: #999; }
 
-    .cars { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-bottom: 10px; }
+    .step-label.active { 
+        color: #111; 
+        font-weight: 600; }
+
+    .step-line { 
+        flex: 1; 
+        height: 1px; 
+        background: #e0e0e0; 
+        margin: 0 8px; }
+
+    .step-line.done { 
+        background: #1D9E75; }
+
+    .panel { 
+        display: none; }
+
+    .panel.active { 
+        display: block; }
+
+    .section-title { 
+        font-size: 15px; 
+        color: #666; 
+        margin-bottom: 20px; }
+
+    .cars { 
+        display: grid; 
+        grid-template-columns: repeat(3, 1fr); 
+        gap: 14px; 
+        margin-bottom: 10px; }
+
     .car-card {
-        border: 2px solid #e0e0e0; border-radius: 12px;
-        padding: 16px; cursor: pointer; transition: border-color 0.2s, background 0.2s;
+        border: 2px solid #e0e0e0; 
+        border-radius: 12px;
+        padding: 16px; 
+        cursor: pointer; 
+        transition: border-color 0.2s, background 0.2s;
         text-align: center;
     }
-    .car-card:hover { border-color: #0066cc; }
-    .car-card.selected { border-color: #0066cc; background: #f0f7ff; }
-    .car-card .car-emoji { font-size: 32px; margin-bottom: 8px; }
-    .car-card .car-name { font-size: 14px; font-weight: 600; color: #111; margin-bottom: 4px; }
-    .car-card .car-price { font-size: 13px; color: #0066cc; }
+
+    .car-card:hover { 
+        border-color: #0066cc; }
+
+    .car-card.selected { 
+        border-color: #0066cc; 
+        background: #f0f7ff; }
+        
+    .car-card .car-emoji { 
+        font-size: 32px; 
+        margin-bottom: 8px; }
+
+    .car-card .car-name { 
+        font-size: 14px; 
+        font-weight: 600; 
+        color: #111; 
+        margin-bottom: 4px; }
+
+    .car-card .car-price { 
+        font-size: 13px; 
+        color: #0066cc; }
 
     .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
     .form-group { display: flex; flex-direction: column; gap: 6px; }
@@ -227,32 +298,7 @@
         </div>
     </div>
 
-   {{-- Step 3: Pembayaran --}}
-<!-- <div class="panel" id="panel3">
-    <p class="section-title">Pilih metode pembayaran:</p>
-    <div class="pay-opts">
-        <div class="pay-opt" onclick="selectPay(this,'Midtrans')">
-            <div class="pay-emoji">💳</div>
-            <div class="pay-name">Bayar Online</div>
-            <div class="pay-desc">Via Midtrans (Transfer, QRIS, dll)</div>
-        </div>
-        <div class="pay-opt" onclick="selectPay(this,'Kredit / Cicilan')">
-            <div class="pay-emoji">📋</div>
-            <div class="pay-name">Kredit</div>
-            <div class="pay-desc">Cicilan bulanan</div>
-        </div>
-        <div class="pay-opt" onclick="selectPay(this,'Leasing BMW')">
-            <div class="pay-emoji">🏦</div>
-            <div class="pay-name">Leasing</div>
-            <div class="pay-desc">BMW Financial Services</div>
-        </div>
-    </div>
-    <p class="err" id="err3">Pilih metode pembayaran.</p>
-    <div class="nav-btns">
-        <button class="btn-back" onclick="goStep(2)">&larr; Kembali</button>
-        <button class="btn-next" onclick="goStep(4)">Lanjut &rarr;</button>
-    </div>
-</div> -->
+    {{-- Step 3: Metode Pembayaran --}}
 
     <div class="panel" id="panel3">
         <p class="section-title">Pilih metode pembayaran:</p>
@@ -448,41 +494,6 @@
         });
     }
 
-    // function submitOrder() {
-    //     const nama  = document.getElementById('f_nama').value;
-    //     const email = document.getElementById('f_email').value;
-    //     const telp = state.telp;
-    //     const kota  = document.getElementById('f_kota').value;
-    //     const warna = document.getElementById('f_warna').value;
-    //     const hargaAngka = parseInt(state.price.replace(/[^0-9]/g, ''));
-
-    //     fetch('/order', {
-    //         method: 'POST',
-    //         headers: {
-    //             'Content-Type': 'application/json',
-    //             'X-CSRF-TOKEN': '{{ csrf_token() }}'
-    //         },
-    //         body: JSON.stringify({
-    //             nama: nama,
-    //             email: email,
-    //             phone: telp,
-    //             kota: kota,
-    //             model: state.car,
-    //             warna: warna,
-    //             harga: hargaAngka,
-    //             type: 'car'
-    //         })
-    //     })
-    //     .then(res => res.json())
-    //     .then(data => {
-    //         if (data.success) {
-    //             document.getElementById('orderId').textContent = 'Order ID: ' + data.order_id;
-    //             document.getElementById('successDetail').textContent = state.car + ' — ' + state.price;
-    //             showStep(5);
-    //         }
-    //     })
-    //     .catch(err => alert('Terjadi kesalahan, coba lagi.'));
-    // }
 function resetAll() {
     const redirectByType = {
         car: '/buycar',
@@ -539,40 +550,6 @@ function resetAll() {
         state.price = harga;
     }
 
-//     function submitOrder() {
-//     alert('telp: ' + state.telp);
-//     const nama  = document.getElementById('f_nama').value;
-//     const ktp   = document.getElementById('f_ktp').value;
-//     const email = document.getElementById('f_email').value;
-//     const telp = localStorage.getItem('telp') || state.telp || '';
-//     const kota  = document.getElementById('f_kota').value;
-//     const warna = document.getElementById('f_warna').value;
-
-//     fetch('/order', {
-//         method: 'POST',
-//         headers: {
-//             'Content-Type': 'application/json',
-//             'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
-//         },
-//         body: JSON.stringify({
-//             nama, ktp, email, telp, kota, warna,
-//             model: state.car,
-//             harga: state.price,
-//             pembayaran: state.pay
-//         })
-//     })
-//     .then(res => res.json())
-//     .then(data => {
-//         if (data.success) {
-//             document.getElementById('orderId').textContent = 'Order ID: ' + data.order_id;
-//             document.getElementById('successDetail').textContent = state.car + ' — ' + state.price;
-//             showStep(5);
-//         }
-//     })
-//     .catch(err => {
-//         alert('Gagal membuat order. Coba lagi!');
-//     });
-// }
 });
 </script>
 
