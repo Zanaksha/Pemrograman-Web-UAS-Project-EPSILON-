@@ -131,7 +131,12 @@
         @auth
         const activeSize = document.querySelector('.size-btn.active');
         const size = activeSize ? activeSize.textContent : '';
-        window.location.href = `/beli-produk?produk=${encodeURIComponent(data.nama)}&harga=${data.hargaBeli}&size=${encodeURIComponent(size)}`;
+        if (data.ukuran.length > 0 && !size) {
+            alert('Pilih ukuran terlebih dahulu.');
+            return;
+        }
+        const sizeParam = size ? `&size=${encodeURIComponent(size)}` : '';
+        window.location.href = `/beli?model=${encodeURIComponent(data.nama)}&harga=${encodeURIComponent(data.harga)}&type=product&skip=1${sizeParam}`;
         @else
         window.location.href = '/login';
         @endauth

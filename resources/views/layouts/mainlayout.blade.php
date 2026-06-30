@@ -751,6 +751,8 @@
                             <li><a class="dropdown-item" href="/warranty">Warranty</a></li>
                             <li><a class="dropdown-item" href="/buycar">Buy Car</a></li>
                             <li><a class="dropdown-item" href="/choosebuy">Side Product</a></li>
+                            <li><a class="dropdown-item" href="/spareparts">Spareparts</a></li>
+
                         </ul>
                     </li>
                     <li class="nav-item dropdown">

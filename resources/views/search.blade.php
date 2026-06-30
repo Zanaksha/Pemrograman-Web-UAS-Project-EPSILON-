@@ -260,6 +260,29 @@
             </div>
             @endif
 
+             @if($spareparts->count() > 0)
+            <div class="section-block">
+                <div class="section-label">
+                    Spareparts <span class="count-badge">{{ $spareparts->count() }}</span>
+                </div>
+                <div class="result-grid">
+                    @foreach($spareparts as $sparepart)
+                    <a href="/detail?produk={{ strtolower(str_replace(' ', '-', $sparepart->name)) }}" class="result-card">
+                        <div class="card-img-wrap">
+                            <img src="{{ $sparepart->image }}" alt="{{ $sparepart->name }}">
+                        </div>
+                        <div class="card-body">
+                            <div class="card-name">{{ $sparepart->name }}</div>
+                            <div class="card-cat">{{ $sparepart->category }}</div>
+                            <div class="card-divider"></div>
+                            <div class="card-price">Rp {{ number_format($sparepart->price, 0, ',', '.') }}</div>
+                        </div>
+                    </a>
+                    @endforeach
+                </div>
+            </div>
+            @endif
+
         @endif
 
     </div>

@@ -47,6 +47,7 @@
     @php
         $mobilOrders = $orders->filter(fn($o) => $o->type == 'car');
         $produkOrders = $orders->filter(fn($o) => $o->type == 'product');
+        $sparepartOrders = $orders->filter(fn($o) => $o->type == 'sparepart');
     @endphp
 
     <h4 class="mb-3">🚗 Pesanan Mobil</h4>
@@ -141,6 +142,54 @@
             </tr>
             @empty
             <tr><td colspan="8" class="text-center">Belum ada pesanan produk.</td></tr>
+            @endforelse
+        </tbody>
+    </table>
+
+    <h4 class="mb-3">🔧 Pesanan Sparepart</h4>
+    <table class="table table-bordered table-hover">
+        <thead class="table-dark">
+            <tr>
+                <th>Order ID</th><th>Nama</th><th>Email</th><th>Phone</th>
+                <th>Sparepart</th><th>Harga</th><th>Pembayaran</th><th>Status</th><th>Aksi</th>
+            </tr>
+        </thead>
+        <tbody>
+            @forelse($sparepartOrders as $order)
+            <tr>
+                <td>{{ $order->order_id }}</td>
+                <td>{{ $order->nama }}</td>
+                <td>{{ $order->email }}</td>
+                <td>{{ $order->phone }}</td>
+                <td>{{ $order->model }}</td>
+                <td>Rp {{ number_format($order->harga, 0, ',', '.') }}</td>
+                <td>{{ $order->pembayaran ?? '-' }}</td>
+                <td>
+                    <span class="badge {{ $order->status == 'pending' ? 'bg-warning text-dark' : ($order->status == 'confirmed' ? 'bg-success' : 'bg-danger') }}">
+                        {{ $order->status }}
+                    </span>
+                </td>
+                <td>
+                    <form method="POST" action="/admin/orders/{{ $order->id }}/status" style="display:inline;">
+                        @csrf @method('PUT')
+                        <select name="status" class="form-select form-select-sm d-inline w-auto">
+                            <option value="pending" {{ $order->status == 'pending' ? 'selected' : '' }}>Pending</option>
+                            <option value="confirmed" {{ $order->status == 'confirmed' ? 'selected' : '' }}>Confirmed</option>
+                            <option value="cancelled" {{ $order->status == 'cancelled' ? 'selected' : '' }}>Cancelled</option>
+                        </select>
+                        <button type="submit" class="btn btn-sm btn-primary ms-1">Update</button>
+                    </form>
+                    <form method="POST" action="/admin/orders/{{ $order->id }}/delete" style="display:inline;">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-sm btn-danger ms-1" onclick="return confirm('Hapus order ini?')" title="Hapus">
+                            <i class="bi bi-trash"></i>
+                        </button>
+                    </form>
+                </td>
+            </tr>
+            @empty
+            <tr><td colspan="9" class="text-center">Belum ada pesanan sparepart.</td></tr>
             @endforelse
         </tbody>
     </table>

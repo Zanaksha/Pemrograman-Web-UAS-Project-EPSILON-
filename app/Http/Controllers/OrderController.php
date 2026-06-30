@@ -16,19 +16,21 @@ class OrderController extends Controller
         }
 
         $order = Order::create([
-            'user_id'  => Auth::id(),
-            'order_id' => 'BMW-' . time(),
-            'nama'     => $request->nama,
-            'email'    => $request->email,
-            'phone'    => $request->phone,
-            'kota'     => $request->kota,
-            'model'    => $request->model,
-            'warna'    => $request->warna ?? '-',
-            'size'     => $request->size ?? '-',
-            'harga'    => $request->harga,
-            'status'   => 'pending',
-            'type'     => $request->type ?? 'car'
-        ]);
+        'user_id'    => Auth::id(),
+        'order_id'   => 'BMW-' . strtoupper(uniqid()),
+        'nama'       => $request->nama,
+        'email'      => $request->email,
+        'phone'      => $request->telp,
+        'kota'       => $request->kota,
+        'ktp'        => $request->ktp,
+        'warna'      => $request->warna,
+        'size'       => $request->size,
+        'model'      => $request->model,
+        'harga' => preg_replace('/[^0-9]/', '', $request->harga),
+        'pembayaran' => $request->pembayaran,
+        'type'       => $request->type ?? 'car',
+        'status'     => 'pending',
+    ]);
 
         return response()->json([
             'success'  => true,

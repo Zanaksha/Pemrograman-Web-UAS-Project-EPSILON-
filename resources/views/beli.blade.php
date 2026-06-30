@@ -119,7 +119,7 @@
     <div class="steps" id="stepsBar">
         <div class="step-item">
             <div class="step-num active" id="sn1">1</div>
-            <span class="step-label active" id="sl1">Pilih Mobil</span>
+            <span class="step-label active" id="sl1">Pilih Item</span>
         </div>
         <div class="step-line" id="line1"></div>
         <div class="step-item">
@@ -140,7 +140,7 @@
 
     {{-- Step 1: Pilih Mobil --}}
     <div class="panel active" id="panel1">
-        <p class="section-title">Pilih model BMW yang ingin dibeli:</p>
+        <p class="section-title" id="panel1Title">Pilih model BMW yang ingin dibeli:</p>
         <div class="cars">
             <div class="car-card" onclick="selectCar(this,'BMW 3 Series','Rp 750.000.000')">
                 <div class="car-emoji">🚗</div>
@@ -208,7 +208,7 @@
                 <label>Kota</label>
                 <input type="text" id="f_kota" placeholder="">
             </div>
-            <div class="form-group">
+            <div class="form-group" id="warnaWrap">
                 <label>Warna Mobil</label>
                 <select id="f_warna">
                     <option value="">Pilih warna</option>
@@ -228,7 +228,7 @@
     </div>
 
    {{-- Step 3: Pembayaran --}}
-<div class="panel" id="panel3">
+<!-- <div class="panel" id="panel3">
     <p class="section-title">Pilih metode pembayaran:</p>
     <div class="pay-opts">
         <div class="pay-opt" onclick="selectPay(this,'Midtrans')">
@@ -252,7 +252,17 @@
         <button class="btn-back" onclick="goStep(2)">&larr; Kembali</button>
         <button class="btn-next" onclick="goStep(4)">Lanjut &rarr;</button>
     </div>
-</div>
+</div> -->
+
+    <div class="panel" id="panel3">
+        <p class="section-title">Pilih metode pembayaran:</p>
+        <div class="pay-opts" id="payOpts"></div>
+        <p class="err" id="err3">Pilih metode pembayaran.</p>
+        <div class="nav-btns">
+            <button class="btn-back" onclick="goStep(2)">&larr; Kembali</button>
+            <button class="btn-next" onclick="goStep(4)">Lanjut &rarr;</button>
+        </div>
+    </div>
 
     {{-- Step 4: Konfirmasi --}}
     <div class="panel" id="panel4">
@@ -282,7 +292,38 @@
 </div>
 
 <script>
-    let state = { step: 1, car: '', price: '', pay: '', telp: '' };
+
+        const paymentMethods = {
+        car: [
+            { name: 'Transfer / Cash', emoji: '💳', desc: 'Pembayaran tunai langsung' },
+            { name: 'Kredit / Cicilan', emoji: '📋', desc: 'Cicilan bulanan via bank' },
+            { name: 'Leasing BMW', emoji: '🏦', desc: 'BMW Financial Services' },
+        ],
+        product: [
+            { name: 'Transfer Bank', emoji: '🏦', desc: 'Transfer ke rekening' },
+            { name: 'QRIS', emoji: '📱', desc: 'Scan QR untuk bayar' },
+            { name: 'COD', emoji: '📦', desc: 'Bayar saat barang sampai' },
+        ],
+        sparepart: [
+            { name: 'Transfer Bank', emoji: '🏦', desc: 'Transfer ke rekening' },
+            { name: 'QRIS', emoji: '📱', desc: 'Scan QR untuk bayar' },
+            { name: 'COD', emoji: '📦', desc: 'Bayar saat barang sampai' },
+        ],
+    };
+
+    function renderPaymentOptions(type) {
+        const methods = paymentMethods[type] || paymentMethods.product;
+        const container = document.getElementById('payOpts');
+        container.innerHTML = methods.map(m => `
+            <div class="pay-opt" onclick="selectPay(this,'${m.name}')">
+                <div class="pay-emoji">${m.emoji}</div>
+                <div class="pay-name">${m.name}</div>
+                <div class="pay-desc">${m.desc}</div>
+            </div>
+        `).join('');
+    }
+
+    let state = { step: 1, car: '', price: '', pay: '', telp: '', type: 'car', size: '' };
 
     function selectCar(el, name, price) {
         document.querySelectorAll('.car-card').forEach(c => c.classList.remove('selected'));
@@ -305,7 +346,10 @@
             return;
         }
         if (n === 3) {
-            const fields = ['f_nama','f_ktp','f_email','f_telp','f_kota','f_warna'];
+            const fields = ['f_nama','f_ktp','f_email','f_telp','f_kota'];
+            if (state.type === 'car') {
+                fields.push('f_warna');
+            }
             const empty = fields.some(id => !document.getElementById(id).value.trim());
             if (empty) {
                 document.getElementById('err2').style.display = 'block';
@@ -327,12 +371,13 @@
     function buildSummary() {
         const nama  = document.getElementById('f_nama').value;
         const kota  = document.getElementById('f_kota').value;
-        const warna = document.getElementById('f_warna').value;
+        const warna = state.type === 'car' ? document.getElementById('f_warna').value : '';
         const email = document.getElementById('f_email').value;
         state.telp  = document.getElementById('f_telp').value; 
         document.getElementById('summaryBox').innerHTML = `
-            <div class="summary-row"><span>Model</span><span>${state.car}</span></div>
-            <div class="summary-row"><span>Warna</span><span>${warna}</span></div>
+            <div class="summary-row"><span>${state.type === 'car' ? 'Model' : 'Item'}</span><span>${state.car}</span></div>
+            ${state.type === 'car' ? `<div class="summary-row"><span>Warna</span><span>${warna}</span></div>` : ''}
+            ${state.size ? `<div class="summary-row"><span>Ukuran</span><span>${state.size}</span></div>` : ''}
             <div class="summary-row"><span>Pembeli</span><span>${nama}</span></div>
             <div class="summary-row"><span>Email</span><span>${email}</span></div>
             <div class="summary-row"><span>Kota</span><span>${kota}</span></div>
@@ -373,17 +418,19 @@
                 'Content-Type': 'application/json',
                 'X-CSRF-TOKEN': '{{ csrf_token() }}'
             },
-            body: JSON.stringify({
-                nama: nama,
-                ktp: ktp,
-                email: email,
-                telp: telp,
-                kota: kota,
-                warna: warna,
-                model: state.car,
-                harga: state.price,
-                pembayaran: state.pay
-            })
+           body: JSON.stringify({
+            nama: nama,
+            ktp: ktp,
+            email: email,
+            telp: telp,
+            kota: kota,
+            warna: warna,
+            model: state.car,
+            harga: state.price,
+            pembayaran: state.pay,
+            type: state.type,
+            size: state.size
+        })
         })
         .then(res => res.json())
         .then(data => {
@@ -437,13 +484,41 @@
     //     .catch(err => alert('Terjadi kesalahan, coba lagi.'));
     // }
 function resetAll() {
-    window.location.href = '/buycar';
+    const redirectByType = {
+        car: '/buycar',
+        sparepart: '/spareparts',
+        product: '/choosebuy'
+    };
+    window.location.href = redirectByType[state.type] || '/buycar';
 }
 
   document.addEventListener('DOMContentLoaded', function () {
     const params = new URLSearchParams(window.location.search);
     const model = params.get('model');
     const harga = params.get('harga');
+    const type = params.get('type') || 'car';
+    const size = params.get('size') || '';
+
+    state.type = type;
+    state.size = size;
+    renderPaymentOptions(type);
+
+    // Sesuaikan label step & judul & field sesuai jenis item (mobil/sparepart/produk)
+    const typeLabels = { car: 'Mobil', sparepart: 'Sparepart', product: 'Produk' };
+    const typeTitles = {
+        car: 'Pilih model BMW yang ingin dibeli:',
+        sparepart: 'Pilih sparepart yang ingin dibeli:',
+        product: 'Pilih produk yang ingin dibeli:'
+    };
+    const itemLabel = typeLabels[type] || 'Item';
+    document.getElementById('sl1').textContent = 'Pilih ' + itemLabel;
+    document.getElementById('panel1Title').textContent = typeTitles[type] || 'Pilih item yang ingin dibeli:';
+
+    // Field "Warna Mobil" cuma relevan untuk mobil
+    const warnaWrap = document.getElementById('warnaWrap');
+    if (warnaWrap) {
+        warnaWrap.style.display = (type === 'car') ? '' : 'none';
+    }
 
     if (model && harga) {
         const container = document.querySelector('.cars');
@@ -454,7 +529,7 @@ function resetAll() {
         newCard.style.borderColor = '#0066cc';
         newCard.style.background = '#f0f7ff';
         newCard.innerHTML = `
-            <div class="car-emoji">🚗</div>
+            <div class="car-emoji">${type === 'car' ? '🚗' : (type === 'sparepart' ? '🔧' : '🛍️')}</div>
             <div class="car-name">${model}</div>
             <div class="car-price">${harga}</div>
         `;

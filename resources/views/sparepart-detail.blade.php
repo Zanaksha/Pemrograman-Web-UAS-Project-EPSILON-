@@ -31,7 +31,7 @@
                 <div class="spec-row"><span>Compatible With</span><strong>{{ $sparepart->compatible_model ?? 'All Models' }}</strong></div>
                 <div class="spec-row"><span>Stock Available</span><strong>{{ $sparepart->stock }} units</strong></div>
             </div>
-                <a href="/beli?model={{ urlencode($sparepart->name) }}&harga=Rp+{{ number_format($sparepart->price, 0, ',', '.') }}&skip=1" class="btn-order">Order Now →</a>
+                <a href="/beli?model={{ urlencode($sparepart->name) }}&harga=Rp+{{ number_format($sparepart->price, 0, ',', '.') }}&type=sparepart&skip=1" class="btn-order">Order Now →</a>
         </div>
     </div>
 </div>
