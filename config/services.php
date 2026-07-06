@@ -36,4 +36,9 @@ return [
         'is_production' => env('MIDTRANS_IS_PRODUCTION', false),
     ],
 
+    'ollama' => [
+    'url' => env('OLLAMA_URL', 'http://localhost:11434'),
+    'model' => env('OLLAMA_MODEL', 'qwen2.5:7b'),
+    ],
+
 ];
