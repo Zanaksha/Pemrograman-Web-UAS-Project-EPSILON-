@@ -17,7 +17,7 @@ class CarController extends Controller
         }
 
         if ($request->series) {
-            $query->where('series', $request->series);
+            $query->where('name', 'like', '%' . $request->series . '%');
         }
 
         if ($request->drivetrain) {
@@ -29,7 +29,7 @@ class CarController extends Controller
         return view('models', compact('models'));
     }
 
-        public function buycar(Request $request)
+    public function buycar(Request $request)
     {
         $query = CarModel::query();
 
@@ -38,7 +38,7 @@ class CarController extends Controller
         }
 
         if ($request->series) {
-            $query->where('series', $request->series);
+            $query->where('name', 'like', '%' . $request->series . '%');
         }
 
         if ($request->drivetrain) {
@@ -50,9 +50,13 @@ class CarController extends Controller
         return view('buycar', compact('models'));
     }
 
-    
+    public function show($slug)
+    {
+        $car = CarModel::where('slug', $slug)->firstOrFail();
+        return view('car-detail', compact('car'));
+    }
 
-        public function brochure($slug)
+    public function brochure($slug)
     {
         $model = CarModel::where('slug', $slug)->firstOrFail();
 

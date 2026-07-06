@@ -101,7 +101,7 @@
           <hr class="my-4">
               <h4 class="mb-3">Series</h4>
                   <div class="row g-2">
-                    @foreach(['i','X','3','4','5','7','Z'] as $s)
+                    @foreach(['i','X','M','3','4','5','7','Z'] as $s)
                     <div class="col-4">
                         <a href="/models?series={{ $s }}" class="filter-btn {{ request('series') == $s ? 'active' : '' }}">{{ $s }}</a>
                     </div>
@@ -143,7 +143,7 @@
             <div class="row g-4 mt-2">
                 @forelse($models as $model)
                 <div class="col-md-4">
-                    <div class="car-card" onclick="window.location.href='/{{ $model->slug }}'">
+                    <div class="car-card" onclick="window.location.href='/cars/{{ $model->slug }}'">
                         <span class="badge-type">{{ $model->category }}</span>
                         <h1>{{ $model->name }}</h1>
                         <p>Model</p>

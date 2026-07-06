@@ -103,14 +103,47 @@
 
     {{-- Gambar Mobil --}}
     @php
-        $imagePath = public_path('images/' . basename($model->image));
         $imageData = '';
-        $imageExt = 'png';
-        if(file_exists($imagePath)) {
-            $imageData = base64_encode(file_get_contents($imagePath));
-            $imageExt = pathinfo($imagePath, PATHINFO_EXTENSION);
+        $imageExt = 'jpg';
+
+        if ($model->image) {
+            if (str_starts_with($model->image, 'http')) {
+                // URL eksternal → cURL
+                try {
+                    $ch = curl_init($model->image);
+                    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+                    curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+                    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+                    curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/5.0');
+                    curl_setopt($ch, CURLOPT_TIMEOUT, 10);
+                    $raw = curl_exec($ch);
+                    curl_close($ch);
+                    if ($raw) {
+                        $imageData = base64_encode($raw);
+                        $imageExt = pathinfo(parse_url($model->image, PHP_URL_PATH), PATHINFO_EXTENSION) ?: 'jpg';
+                    }
+                } catch (\Exception $e) {}
+            } else {
+                // Coba beberapa kemungkinan path
+                $candidates = [
+                    public_path($model->image),                        // images/cars/file.png
+                    public_path('images/cars/' . $model->image),       // file lama tanpa folder
+                    public_path('images/' . $model->image),            // images/file.png
+                ];
+                foreach ($candidates as $path) {
+                    if (file_exists($path)) {
+                        $imageData = base64_encode(file_get_contents($path));
+                        $imageExt = pathinfo($path, PATHINFO_EXTENSION);
+                        break;
+                    }
+                }
+            }
         }
     @endphp
+
+    {{-- DEBUG sementara --}}
+    <p>Image field: {{ $model->image }}</p>
+    <p>Image data length: {{ strlen($imageData) }}</p>
 
     @if($imageData)
     <div style="background:#f5f5f5; text-align:center; padding:20px 40px;">

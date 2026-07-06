@@ -18,32 +18,32 @@ use App\Http\Controllers\SparepartController;
 Route::get('/spareparts', [SparepartController::class, 'index']);
 Route::get('/spareparts/{id}', [SparepartController::class, 'show']);
 
-    Route::get('/search', [SearchController::class, 'index'])->name('search');
+Route::get('/search', [SearchController::class, 'index'])->name('search');
 
-    Route::get('/produk-detail', function () {
+Route::get('/produk-detail', function () {
     $produk = \App\Models\Product::where('name', request('produk', ''))->first();
     return view('produk-detail', compact('produk'));
-    });
+});
 
-    Route::get('/beli-produk', function () {
-        return view('beli-produk');
-    });
+Route::get('/beli-produk', function () {
+    return view('beli-produk');
+});
 
-        Route::get('/sneakers', function () { 
-        return redirect('/produk-detail?produk=sneakers'); 
-    });
+Route::get('/sneakers', function () {
+    return redirect('/produk-detail?produk=sneakers');
+});
 
-    Route::get('/hoodie', function () { 
-        return redirect('/produk-detail?produk=hoodie'); 
-    });
+Route::get('/hoodie', function () {
+    return redirect('/produk-detail?produk=hoodie');
+});
 
-    Route::get('/watch', function () { 
-        return redirect('/produk-detail?produk=watch'); 
-    });
+Route::get('/watch', function () {
+    return redirect('/produk-detail?produk=watch');
+});
 
-    Route::get('/tshirt', function () { 
-        return redirect('/produk-detail?produk=tshirt'); 
-    });
+Route::get('/tshirt', function () {
+    return redirect('/produk-detail?produk=tshirt');
+});
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -58,7 +58,6 @@ Route::get('/warranties', [WarrantyController::class, 'index']);
 Route::post('/warranties/check', [WarrantyController::class, 'check'])->name('warranty.check');
 
 Route::get('/support', [CustomerSupportController::class, 'index'])->name('support.index');
-
 Route::get('/support/search', [CustomerSupportController::class, 'search'])->name('support.searchsupport');
 
 Route::middleware(['admin'])->prefix('admin')->group(function () {
@@ -107,7 +106,7 @@ Route::middleware(['admin'])->prefix('admin')->group(function () {
     Route::delete('/warranties/{id}', [AdminController::class, 'warrantyDestroy'])->name('admin.warranties.destroy');
     Route::post('/warranties/{id}/service', [AdminController::class, 'serviceStore'])->name('admin.service.store');
 });
- 
+
 Route::get('/models', [CarController::class, 'index']);
 
 Route::post('/contactinfo', [MessageController::class, 'store'])->name('message.store');
@@ -115,165 +114,74 @@ Route::post('/contactinfo', [MessageController::class, 'store'])->name('message.
 Route::get('/brochure/{slug}', [CarController::class, 'brochure'])->name('brochure');
 
 Route::get('/chatbot', [ChatbotController::class, 'index']);
-
 Route::post('/chatbot/send', [ChatbotController::class, 'send']);
 
-Route::get('/', function () {   
-    return view('home'); 
+Route::get('/', function () {
+    return view('home');
 });
 
-Route::get('/about', function () { 
-    return view('about'); 
+Route::get('/about', function () {
+    return view('about');
 });
 
 Route::get('/buycar', [CarController::class, 'buycar']);
 
-// Route::get('/models', function () { 
-//     return view('models'); 
-// });
+// =============================================
+// ROUTE DETAIL MOBIL — semua pakai template dinamis
+// URL lama di-redirect ke /cars/{slug}
+// =============================================
+Route::get('/cars/{slug}', [CarController::class, 'show'])->name('car.show');
 
-Route::get('/ix', function () { 
-    return view('ix'); 
-});
-
-Route::get('/ix1', function () { 
-    return view('ix1'); 
-});
-
-Route::get('/i7', function () { 
-    return view('i7'); 
-});
-
-Route::get('/i4', function () { 
-    return view('i4');
-});
-
-Route::get('/xm', function () { 
-    return view('xm'); 
-});
-
-Route::get('/x5', function () { 
-    return view('x5'); 
-});
-
-Route::get('/x3', function () { 
-    return view('x3'); 
-});
-
-Route::get('/7-series', function () { 
-    return view('7'); 
-});
-
-Route::get('/i5', function () { 
-    return view('i5');
-});
-
-Route::get('/m3', function () { 
-    return view('m3');
-});
-
-Route::get('/m4', function () { 
-    return view('m4');
-});
-
-Route::get('/4-gran-coupe', function () { 
-    return view('4');
-});
-
-Route::get('/4-convertible', function () { 
-    return view('4convert');
-});
-
-Route::get('/3-series', function () { 
-    return view('3');
-});
-
-Route::get('/5-series', function () { 
-    return view('5series');
-});
-// Route::get('/choosebuy', function () { 
-//     return view('choosebuy'); 
-// });
+Route::get('/ix',           function () { return redirect('/cars/ix'); });
+Route::get('/ix1',          function () { return redirect('/cars/ix1'); });
+Route::get('/i7',           function () { return redirect('/cars/i7'); });
+Route::get('/i4',           function () { return redirect('/cars/i4'); });
+Route::get('/i5',           function () { return redirect('/cars/i5'); });
+Route::get('/xm',           function () { return redirect('/cars/xm'); });
+Route::get('/x5',           function () { return redirect('/cars/x5'); });
+Route::get('/x3',           function () { return redirect('/cars/x3'); });
+Route::get('/m3',           function () { return redirect('/cars/m3'); });
+Route::get('/m4',           function () { return redirect('/cars/m4'); });
+Route::get('/7-series',     function () { return redirect('/cars/7-series'); });
+Route::get('/3-series',     function () { return redirect('/cars/3-series'); });
+Route::get('/5-series',     function () { return redirect('/cars/5-series'); });
+Route::get('/4-gran-coupe', function () { return redirect('/cars/4-gran-coupe'); });
+Route::get('/4-convertible',function () { return redirect('/cars/4-convertible'); });
 
 Route::get('/choosebuy', [AdminController::class, 'shop']);
 
-Route::get('/finddealer', function () { 
-    return view('finddealer'); 
+Route::get('/finddealer', function () {
+    return view('finddealer');
 });
 
-Route::get('/shop', function () { 
-    return view('shop'); 
+Route::get('/shop', function () {
+    return view('shop');
 });
-
-// Route::get('/buycar', function () { 
-//     return view('buycar'); 
-// });
 
 Route::get('/customer', [CustomerSupportController::class, 'index']);
 
-Route::get('/contactinfo', function () { 
-    return view('contactinfo'); 
+Route::get('/contactinfo', function () {
+    return view('contactinfo');
 });
 
-Route::get('/shop2', function () { 
-    return view('shop2'); 
-});
+Route::get('/shop2', function () { return view('shop2'); });
+Route::get('/shop3', function () { return view('shop3'); });
+Route::get('/shop4', function () { return view('shop4'); });
+Route::get('/shop5', function () { return view('shop5'); });
+Route::get('/shop6', function () { return view('shop6'); });
+Route::get('/shop7', function () { return view('shop7'); });
+Route::get('/shop8', function () { return view('shop8'); });
+Route::get('/shop9', function () { return view('shop9'); });
 
-Route::get('/shop3', function () { 
-    return view('shop3'); 
-});
-
-Route::get('/shop4', function () { 
-    return view('shop4'); 
-});
-
-Route::get('/shop5', function () { 
-    return view('shop5'); 
-});
-
-Route::get('/shop6', function () { 
-    return view('shop6'); 
-});
-
-Route::get('/shop7', function () { 
-    return view('shop7'); 
-});
-
-Route::get('/shop8', function () { 
-    return view('shop8'); 
-});
-
-Route::get('/shop9', function () { 
-    return view('shop9'); 
-});
-
-Route::get('/assistant', function () { 
-    return view('assistant'); 
-});
-
-Route::get('/warranty', function () { 
-    return view('warranty'); 
-});
-
-
-Route::get('/jacket', function () { 
-    return view('jacket'); 
-});
-
-Route::get('/running', function () { 
-    return view('running'); 
-});
-
-Route::get('/running-shoes', function () { 
-    return view('running-shoes'); 
-});
+Route::get('/assistant', function () { return view('assistant'); });
+Route::get('/warranty', function () { return view('warranty'); });
+Route::get('/jacket', function () { return view('jacket'); });
+Route::get('/running', function () { return view('running'); });
+Route::get('/running-shoes', function () { return view('running-shoes'); });
 
 Route::get('/beli', [ProdukController::class, 'buyer'])->name('buyer');
-
 Route::get('/detail', [ProdukController::class, 'detail'])->name('detail');
-
 Route::get('/produk', [ProdukController::class, 'index'])->name('produk.index');
-
 
 Route::get('/dashboard', function () {
     return view('dashboard');

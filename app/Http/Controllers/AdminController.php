@@ -35,13 +35,28 @@ class AdminController extends Controller
     public function carStore(Request $request)
     {
         $request->validate([
-            'name'     => 'required',
-            'slug'     => 'required|unique:cars',
-            'category' => 'required',
-            'series'   => 'required',
+            'name'       => 'required',
+            'slug'       => 'required|unique:cars',
+            'category'   => 'required',
+            'series'     => 'required',
             'drivetrain' => 'required',
         ]);
-        CarModel::create($request->all());
+
+        $data = $request->except(['image_file', 'image2_file', 'image3_file']);
+
+        // Handle upload gambar 1, 2, 3 — prioritaskan file upload, fallback ke URL
+        foreach ([1, 2, 3] as $n) {
+            $field = $n === 1 ? 'image' : "image{$n}";
+            $fileField = $n === 1 ? 'image_file' : "image{$n}_file";
+            if ($request->hasFile($fileField)) {
+                $file = $request->file($fileField);
+                $filename = time() . "_{$n}_" . $file->getClientOriginalName();
+                $file->move(public_path('images/cars'), $filename);
+                $data[$field] = 'images/cars/' . $filename;
+            }
+        }
+
+        CarModel::create($data);
         return redirect()->route('admin.cars')->with('success', 'Mobil berhasil ditambahkan!');
     }
 
@@ -54,14 +69,22 @@ class AdminController extends Controller
     public function carUpdate(Request $request, $id)
     {
         $car = CarModel::findOrFail($id);
-        $car->update($request->all());
-        return redirect()->route('admin.cars')->with('success', 'Mobil berhasil diupdate!');
-    }
+        $data = $request->except(['image_file', 'image2_file', 'image3_file']);
 
-    public function carDestroy($id)
-    {
-        CarModel::findOrFail($id)->delete();
-        return redirect()->route('admin.cars')->with('success', 'Mobil berhasil dihapus!');
+        // Handle upload gambar 1, 2, 3 — prioritaskan file upload, fallback ke URL
+        foreach ([1, 2, 3] as $n) {
+            $field = $n === 1 ? 'image' : "image{$n}";
+            $fileField = $n === 1 ? 'image_file' : "image{$n}_file";
+            if ($request->hasFile($fileField)) {
+                $file = $request->file($fileField);
+                $filename = time() . "_{$n}_" . $file->getClientOriginalName();
+                $file->move(public_path('images/cars'), $filename);
+                $data[$field] = 'images/cars/' . $filename;
+            }
+        }
+
+        $car->update($data);
+        return redirect()->route('admin.cars')->with('success', 'Mobil berhasil diupdate!');
     }
 
     public function products()

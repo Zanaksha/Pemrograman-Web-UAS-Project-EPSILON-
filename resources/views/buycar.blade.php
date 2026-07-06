@@ -115,7 +115,7 @@
 
             <h4 class="mb-3">Series</h4>
             <div class="row g-2">
-                @foreach(['i','X','3','4','5','7','Z'] as $s)
+                @foreach(['i','X','M','3','4','5','7','Z'] as $s)
                 <div class="col-4">
                     <a href="/buycar?series={{ $s }}" class="filter-btn {{ request('series') == $s ? 'active' : '' }}">{{ $s }}</a>
                 </div>
@@ -169,7 +169,8 @@
                         @endif
 
                         <div class="electric">{{ $model->drivetrain }}</div>
-                        <a href="/beli?model={{ urlencode($model->name) }}&harga={{ urlencode($model->price ?? 'Hubungi Dealer') }}&skip=1" class="buy-btn">Beli Sekarang</a>
+                        <a href="/cars/{{ $model->slug }}" class="buy-btn" style="background:#444; margin-bottom:6px;">Lihat Detail</a>
+                        <a href="/beli?model={{ urlencode($model->name) }}&harga={{ urlencode($model->price ?? 'Hubungi Dealer') }}&skip=1&type=car" class="buy-btn">Beli Sekarang</a>
                     </div>
                 </div>
                 @empty
