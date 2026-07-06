@@ -169,7 +169,7 @@
                         @endif
 
                         <div class="electric">{{ $model->drivetrain }}</div>
-                        <a href="/cars/{{ $model->slug }}" class="buy-btn" style="background:#444; margin-bottom:6px;">Lihat Detail</a>
+                        <!-- <a href="/cars/{{ $model->slug }}" class="buy-btn" style="background:#444; margin-bottom:6px;">Lihat Detail</a> -->
                         <a href="/beli?model={{ urlencode($model->name) }}&harga={{ urlencode($model->price ?? 'Hubungi Dealer') }}&skip=1&type=car" class="buy-btn">Beli Sekarang</a>
                     </div>
                 </div>

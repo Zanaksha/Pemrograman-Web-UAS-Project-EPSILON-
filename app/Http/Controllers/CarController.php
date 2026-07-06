@@ -60,13 +60,13 @@ class CarController extends Controller
     {
         $model = CarModel::where('slug', $slug)->firstOrFail();
 
-        $pdf = Pdf::loadView('brochure', compact('model'))
-                ->setOptions([
-                    'isRemoteEnabled' => true,
-                    'isPhpEnabled' => true,
-                    'defaultFont' => 'sans-serif',
-                    'chroot' => public_path(),
-                ]);
+       $pdf = Pdf::loadView('brochure', compact('model'))
+        ->setOptions([
+            'isRemoteEnabled' => true,
+            'isPhpEnabled'    => false,  // ← ubah ke false
+            'defaultFont'     => 'sans-serif',
+            'chroot'          => public_path(),
+        ]);
 
         return $pdf->download('BMW-' . $model->name . '-Brochure.pdf');
     }

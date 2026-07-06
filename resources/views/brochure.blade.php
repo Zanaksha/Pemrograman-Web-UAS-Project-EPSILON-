@@ -145,16 +145,9 @@
     <p>Image field: {{ $model->image }}</p>
     <p>Image data length: {{ strlen($imageData) }}</p>
 
-    @if($imageData)
-    <div style="background:#f5f5f5; text-align:center; padding:20px 40px;">
-        <img src="data:image/{{ $imageExt }};base64,{{ $imageData }}"
-            style="max-width:500px; width:100%; height:250px; object-fit:contain;">
-    </div>
-    @else
     <div style="background:#f5f5f5; text-align:center; padding:30px 40px;">
         <div style="font-size:36px; font-weight:bold; color:#ddd;">BMW {{ $model->name }}</div>
     </div>
-    @endif
 
     {{-- Model Name --}}
     <div class="model-name">BMW {{ $model->name }}</div>

@@ -11,6 +11,7 @@ use App\Models\ServiceHistory;
 use App\Models\Order;
 use App\Models\Sparepart; 
 
+
 class AdminController extends Controller
 {
     public function dashboard()
@@ -456,5 +457,11 @@ class AdminController extends Controller
     {
         Sparepart::findOrFail($id)->delete();
         return redirect()->route('admin.spareparts')->with('success', 'Sparepart berhasil dihapus!');
+    }
+
+    public function carDestroy($id)
+    {
+        CarModel::findOrFail($id)->delete();
+        return redirect()->route('admin.cars')->with('success', 'Mobil berhasil dihapus!');
     }
 }
