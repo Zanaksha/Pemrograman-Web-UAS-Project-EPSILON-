@@ -18,10 +18,18 @@ class OllamaChatService
         $this->model = config('services.ollama.model');
     }
 
-    public function chat(string $userMessage): string
+    /**
+     * @param  array  $history  riwayat percakapan sebelumnya (dari session)
+     * @param  string  $userMessage  pesan baru dari user
+     * @return array{0: array, 1: string}  [history yang sudah diupdate & di-trim, jawaban bot]
+     */
+    public function chat(array $history, string $userMessage): array
     {
-        $messages = [
-            [
+        $messages = $history;
+
+        // system prompt cuma ditaruh sekali di awal percakapan
+        if (empty($messages)) {
+            $messages[] = [
                 'role' => 'system',
                 'content' =>
                     "You are a chatbot assistant for EPSILON, a car dealership. " .
@@ -30,9 +38,10 @@ class OllamaChatService
                     "If a tool returns no data, say clearly that you don't know. " .
                     "ALWAYS use the appropriate tool for questions about cars, products, or FAQs; never answer from your own memory. " .
                     "Reply in a friendly, concise tone, in the same language the user used."
-            ],
-            ['role' => 'user', 'content' => $userMessage],
-        ];
+            ];
+        }
+
+        $messages[] = ['role' => 'user', 'content' => $userMessage];
 
         // loop up to 3 times to avoid infinite tool-calling loops
         for ($i = 0; $i < 3; $i++) {
@@ -46,12 +55,13 @@ class OllamaChatService
             $message = $response['message'] ?? null;
 
             if (!$message) {
-                return "Sorry, something went wrong while contacting the model.";
+                return [$this->trimHistory($messages), "Sorry, something went wrong while contacting the model."];
             }
 
             // no tool call requested -> this is the final answer
             if (empty($message['tool_calls'])) {
-                return $message['content'] ?? "Sorry, I couldn't answer that.";
+                $messages[] = $message;
+                return [$this->trimHistory($messages), $message['content'] ?? "Sorry, I couldn't answer that."];
             }
 
             // append assistant's tool_call message, then execute each tool
@@ -70,7 +80,48 @@ class OllamaChatService
             }
         }
 
-        return "Sorry, I had trouble processing this request.";
+        return [$this->trimHistory($messages), "Sorry, I had trouble processing this request."];
+    }
+
+    /**
+     * Batasi history maksimal N "turn" (1 turn = 1 pesan user beserta
+     * tool_calls, tool response, dan jawaban assistant yang menyertainya).
+     * System prompt selalu dipertahankan di awal.
+     */
+    protected function trimHistory(array $messages, int $maxTurns = 5): array
+    {
+        $system = null;
+        $rest = [];
+
+        foreach ($messages as $msg) {
+            if ($msg['role'] === 'system' && $system === null) {
+                $system = $msg;
+            } else {
+                $rest[] = $msg;
+            }
+        }
+
+        $turns = [];
+        $currentTurn = [];
+
+        foreach (array_reverse($rest) as $msg) {
+            $currentTurn[] = $msg;
+
+            if ($msg['role'] === 'user') {
+                $turns[] = array_reverse($currentTurn);
+                $currentTurn = [];
+            }
+        }
+
+        $turns = array_reverse($turns);
+        $keptTurns = array_slice($turns, -$maxTurns);
+
+        $trimmed = $system ? [$system] : [];
+        foreach ($keptTurns as $turn) {
+            $trimmed = array_merge($trimmed, $turn);
+        }
+
+        return $trimmed;
     }
 
     protected function toolDefinitions(): array

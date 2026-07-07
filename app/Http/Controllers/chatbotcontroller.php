@@ -14,7 +14,11 @@ class ChatbotController extends Controller
 
     public function send(Request $request, OllamaChatService $chat)
     {
-        $reply = $chat->chat(trim($request->message));
+        $history = session('chat_history', []);
+
+        [$updatedHistory, $reply] = $chat->chat($history, trim($request->message));
+
+        session(['chat_history' => $updatedHistory]);
 
         return response()->json(['reply' => $reply]);
     }
