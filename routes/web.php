@@ -115,6 +115,8 @@ Route::get('/brochure/{slug}', [CarController::class, 'brochure'])->name('brochu
 
 Route::get('/chatbot', [ChatbotController::class, 'index']);
 Route::post('/chatbot/send', [ChatbotController::class, 'send']);
+Route::get('/chatbot/history', [ChatbotController::class, 'history']);
+Route::post('/chatbot/reset', [ChatbotController::class, 'reset']);
 
 Route::get('/', function () {
     return view('home');
