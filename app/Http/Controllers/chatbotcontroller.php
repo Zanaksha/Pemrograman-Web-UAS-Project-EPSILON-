@@ -7,6 +7,8 @@ use App\Services\OllamaChatService;
 
 class ChatbotController extends Controller
 {
+    protected const MAX_DISPLAY_MESSAGES = 50; // 25 pasang tanya-jawab
+
     public function index()
     {
         return view('chatbot.index');
@@ -14,17 +16,25 @@ class ChatbotController extends Controller
 
     public function send(Request $request, OllamaChatService $chat)
     {
+        $userMessage = trim($request->input('message', ''));
+
+        if ($userMessage === '') {
+            return response()->json(['reply' => 'Pesan tidak boleh kosong.'], 422);
+        }
+
         $history = session('chat_history', []);
-        $userMessage = trim($request->message);
 
         [$updatedHistory, $reply] = $chat->chat($history, $userMessage);
 
         session(['chat_history' => $updatedHistory]);
 
-        // simpan versi bersih buat ditampilkan lagi nanti
+        // simpan versi bersih buat ditampilkan lagi nanti, dibatasi biar session nggak membengkak
         $displayHistory = session('chat_display_history', []);
         $displayHistory[] = ['role' => 'user', 'text' => $userMessage];
         $displayHistory[] = ['role' => 'bot', 'text' => $reply];
+
+        $displayHistory = array_slice($displayHistory, -self::MAX_DISPLAY_MESSAGES);
+
         session(['chat_display_history' => $displayHistory]);
 
         return response()->json(['reply' => $reply]);
