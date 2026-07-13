@@ -40,7 +40,7 @@
 <body>
 
 <div class="sidebar">
-    <div class="brand">BMW ADMIN</div>
+    <div class="brand">EPSILON ADMIN</div>
     <a href="/admin" class="active"><i class="bi bi-speedometer2 me-2"></i> Dashboard</a>
     <a href="/admin/cars"><i class="bi bi-car-front me-2"></i> Manage Cars</a>
     <a href="/admin/products"><i class="bi bi-bag me-2"></i> Manage Products</a>

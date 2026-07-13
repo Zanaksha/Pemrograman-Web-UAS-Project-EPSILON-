@@ -1,6 +1,6 @@
 @extends('layouts.mainlayout')
 
-@section('title', 'BMW ' . $car->name)
+@section('title', 'EPSILON ' . $car->name)
 
 @section('content')
 
@@ -23,7 +23,7 @@
 <div class="left">
   <div class="image-viewer">
     <button class="arrow prev">&#10094;</button>
-    <img id="mainImage" src="{{ $img1 }}" alt="BMW {{ $car->name }}">
+    <img id="mainImage" src="{{ $img1 }}" alt="EPSILON {{ $car->name }}">
     <button class="arrow next">&#10095;</button>
   </div>
 
@@ -41,12 +41,12 @@
     <span>&gt;</span>
     <a href="/models">Models</a>
     <span>&gt;</span>
-    <span>BMW {{ $car->name }}</span>
+    <span>EPSILON {{ $car->name }}</span>
   </div>
 
-  <h1>BMW {{ $car->name }}</h1>
+  <h1>EPSILON {{ $car->name }}</h1>
 
-  <p>{{ $car->description ?? 'Performa tinggi dengan desain modern dan teknologi terkini dari BMW.' }}</p>
+  <p>{{ $car->description ?? 'High performance with modern design and the latest EPSILON technology.' }}</p>
 
   <div class="spec">
     @if($car->power)
@@ -75,12 +75,12 @@
   </a>
 
   @auth
-  <a href="/beli?model={{ urlencode('BMW ' . $car->name) }}&harga=Rp+{{ number_format($car->price ?? 0, 0, ',', '.') }}&type=car" class="btn-bro" style="margin-top:10px; display:inline-block;">
-    Beli Sekarang
+  <a href="/beli?model={{ urlencode('EPSILON ' . $car->name) }}&harga=Rp+{{ number_format($car->price ?? 0, 0, ',', '.') }}&type=car" class="btn-bro" style="margin-top:10px; display:inline-block;">
+    Buy Now
   </a>
   @else
   <a href="/login" class="btn-bro" style="margin-top:10px; display:inline-block;">
-    Beli Sekarang
+    Buy Now
   </a>
   @endauth
 
@@ -136,7 +136,7 @@
       @endif
       @if($car->price)
       <div class="spec-row">
-        <span><img width="25" height="25" src="https://img.icons8.com/ios/50/money.png"/> Harga</span>
+        <span><img width="25" height="25" src="https://img.icons8.com/ios/50/money.png"/> Price</span>
         <span>Rp {{ number_format($car->price, 0, ',', '.') }}</span>
       </div>
       @endif
@@ -147,20 +147,20 @@
     <h2>Key Features</h2>
     <div class="feature-grid">
       <div class="feature-card">
-        <h3><img width="50" height="50" src="https://img.icons8.com/ios-filled/50/car.png"/> BMW Design</h3>
-        <p>Desain eksterior agresif dengan peningkatan aerodinamis khas BMW.</p>
+        <h3><img width="50" height="50" src="https://img.icons8.com/ios-filled/50/car.png"/> EPSILON Design</h3>
+        <p>Aggressive exterior design with EPSILON's signature aerodynamic enhancements.</p>
       </div>
       <div class="feature-card">
         <h3><img width="50" height="50" src="https://img.icons8.com/ios-filled/50/1A1A1A/convertible-roof-warning--v2.png"/> Premium Interior</h3>
-        <p>Interior premium dengan material berkualitas tinggi dan teknologi canggih.</p>
+        <p>Premium interior with high-quality materials and cutting-edge technology.</p>
       </div>
       <div class="feature-card">
         <h3><img width="50" height="50" src="https://img.icons8.com/ios-filled/50/car-seat.png"/> Sport Seats</h3>
-        <p>Kursi sport premium dengan dukungan dan kenyamanan sempurna.</p>
+        <p>Premium sport seats with perfect support and comfort.</p>
       </div>
       <div class="feature-card">
         <h3><img width="48" height="48" src="https://img.icons8.com/pulsar-line/48/shield.png"/> Driving Assistant</h3>
-        <p>Sistem keselamatan dan bantuan pengemudi canggih terkini.</p>
+        <p>The latest advanced safety and driver assistance systems.</p>
       </div>
     </div>
   </div>

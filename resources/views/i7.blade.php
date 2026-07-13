@@ -48,10 +48,10 @@
     <span>&gt;</span>
     <a href="/models">Models</a>
     <span>&gt;</span>
-    <span>BMW I7</span>
+    <span>EPSILON I7</span>
   </div>
 
-  <h1>BMW I7</h1>
+  <h1>EPSILON I7</h1>
 
   <p>
     High-performance coupe dengan desain agresif dan tenaga besar.

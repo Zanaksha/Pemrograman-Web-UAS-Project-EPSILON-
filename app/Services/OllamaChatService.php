@@ -27,9 +27,9 @@ class OllamaChatService
     }
 
     /**
-     * @param  array  $history  riwayat percakapan sebelumnya (dari session)
-     * @param  string  $userMessage  pesan baru dari user
-     * @return array{0: array, 1: string}  [history yang sudah diupdate & di-trim, jawaban bot]
+     * @param  array 
+     * @param  string  
+     * @return array
      */
     public function chat(array $history, string $userMessage): array
     {

@@ -211,7 +211,7 @@
 
     {{-- Step 1: Pilih Mobil --}}
     <div class="panel active" id="panel1">
-        <p class="section-title" id="panel1Title">Pilih model BMW yang ingin dibeli:</p>
+        <p class="section-title" id="panel1Title">Pilih model EPSILON yang ingin dibeli:</p>
         <div class="cars">
             <div class="car-card" onclick="selectCar(this,'BMW 3 Series','Rp 750.000.000')">
                 <div class="car-emoji">🚗</div>
@@ -325,7 +325,7 @@
         <div class="success-box">
             <div class="success-icon">✅</div>
             <h2>Pesanan Berhasil!</h2>
-            <p>Terima kasih telah memesan BMW.</p>
+            <p>Terima kasih telah memesan EPSILON.</p>
             <p>Tim kami akan menghubungi kamu dalam 1x24 jam.</p>
             <p id="successDetail" style="margin-top:10px; font-weight:600; color:#0066cc;"></p>
             <div class="order-id" id="orderId"></div>
@@ -343,7 +343,7 @@
         car: [
             { name: 'Transfer / Cash', emoji: '💳', desc: 'Pembayaran tunai langsung' },
             { name: 'Kredit / Cicilan', emoji: '📋', desc: 'Cicilan bulanan via bank' },
-            { name: 'Leasing BMW', emoji: '🏦', desc: 'BMW Financial Services' },
+            { name: 'Leasing EPSILON', emoji: '🏦', desc: 'EPSILON Financial Services' },
         ],
         product: [
             { name: 'Transfer Bank', emoji: '🏦', desc: 'Transfer ke rekening' },
@@ -517,7 +517,7 @@ function resetAll() {
     // Sesuaikan label step & judul & field sesuai jenis item (mobil/sparepart/produk)
     const typeLabels = { car: 'Mobil', sparepart: 'Sparepart', product: 'Produk' };
     const typeTitles = {
-        car: 'Pilih model BMW yang ingin dibeli:',
+        car: 'Pilih model EPSILON yang ingin dibeli:',
         sparepart: 'Pilih sparepart yang ingin dibeli:',
         product: 'Pilih produk yang ingin dibeli:'
     };

@@ -252,7 +252,7 @@
 
 <section class="why-bmw">
     <div class="container">
-        <h2>Why Choose BMW</h2>
+        <h2>Why Choose EPSILON</h2>
         <div class="why-grid">
             <div class="why-card">
                 <h3>Luxury</h3>
@@ -288,7 +288,7 @@
 
 <div class="stat-box">
     <h1 class="counter" data-target="50">0</h1>
-    <p>BMW Models</p>
+    <p>EPSILON Models</p>
 </div>
 </section>
 

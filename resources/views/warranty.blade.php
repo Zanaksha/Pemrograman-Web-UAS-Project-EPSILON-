@@ -43,7 +43,7 @@ body{font-family:sans-serif;font-size:14px}
   <img src="" alt="BMW"/>
   <div class="hero-text">
     <h1 style="margin-top:200px">Warranty</h1>
-    <p>Drive with confidence. Our warranty coverage is designed to protect your BMW and your peace of mind.</p>
+    <p>Drive with confidence. Our warranty coverage is designed to protect your EPSILON and your peace of mind.</p>
   </div>
 </section>
 
@@ -193,20 +193,20 @@ body{font-family:sans-serif;font-size:14px}
     <h4 class="fw-bold mb-4">Frequently Asked Questions</h4>
     <div class="accordion" id="faq">
       <div class="accordion-item border mb-2 rounded">
-        <h2 class="accordion-header"><button class="accordion-button fw-semibold" data-bs-toggle="collapse" data-bs-target="#f1">How do I know if my BMW is still under warranty?</button></h2>
-        <div id="f1" class="accordion-collapse collapse show" data-bs-parent="#faq"><div class="accordion-body text-muted small">You can check your warranty status using the VIN lookup tool above, or contact your nearest authorized BMW Service Center.</div></div>
+        <h2 class="accordion-header"><button class="accordion-button fw-semibold" data-bs-toggle="collapse" data-bs-target="#f1">How do I know if my EPSILON is still under warranty?</button></h2>
+        <div id="f1" class="accordion-collapse collapse show" data-bs-parent="#faq"><div class="accordion-body text-muted small">You can check your warranty status using the VIN lookup tool above, or contact your nearest authorized EPSILON Service Center.</div></div>
       </div>
       <div class="accordion-item border mb-2 rounded">
         <h2 class="accordion-header"><button class="accordion-button collapsed fw-semibold" data-bs-toggle="collapse" data-bs-target="#f2">Does the warranty transfer to a new owner?</button></h2>
-        <div id="f2" class="accordion-collapse collapse" data-bs-parent="#faq"><div class="accordion-body text-muted small">Yes, the BMW New Vehicle Limited Warranty is fully transferable to subsequent owners within the warranty period.</div></div>
+        <div id="f2" class="accordion-collapse collapse" data-bs-parent="#faq"><div class="accordion-body text-muted small">Yes, the EPSILON New Vehicle Limited Warranty is fully transferable to subsequent owners within the warranty period.</div></div>
       </div>
       <div class="accordion-item border mb-2 rounded">
         <h2 class="accordion-header"><button class="accordion-button collapsed fw-semibold" data-bs-toggle="collapse" data-bs-target="#f3">What should I do if I experience an issue?</button></h2>
-        <div id="f3" class="accordion-collapse collapse" data-bs-parent="#faq"><div class="accordion-body text-muted small">Contact your authorized BMW Service Center as soon as possible. Bring your warranty documents and VIN. Do not attempt unauthorized repairs.</div></div>
+        <div id="f3" class="accordion-collapse collapse" data-bs-parent="#faq"><div class="accordion-body text-muted small">Contact your authorized EPSILON Service Center as soon as possible. Bring your warranty documents and VIN. Do not attempt unauthorized repairs.</div></div>
       </div>
       <div class="accordion-item border rounded">
         <h2 class="accordion-header"><button class="accordion-button collapsed fw-semibold" data-bs-toggle="collapse" data-bs-target="#f4">Can I extend my warranty?</button></h2>
-        <div id="f4" class="accordion-collapse collapse" data-bs-parent="#faq"><div class="accordion-body text-muted small">Yes, BMW offers extended service contracts beyond the original warranty period. Contact your BMW dealer for details.</div></div>
+        <div id="f4" class="accordion-collapse collapse" data-bs-parent="#faq"><div class="accordion-body text-muted small">Yes, EPSILON offers extended service contracts beyond the original warranty period. Contact your EPSILON dealer for details.</div></div>
       </div>
     </div>
   </div>

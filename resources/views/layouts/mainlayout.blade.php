@@ -843,7 +843,7 @@
         <div class="container-fluid">
 
             <a class="navbar-brand" href="/">
-                <img src="https://www.bmw.co.id/content/dam/bmw/common/images/logo-icons/BMW/BMW_White_Logo.svg.asset.1670245093434.svg"
+                <img src="{{ asset('images/epsilon_logo.png') }}"
                     alt="BMW" width="50" height="50">
             </a>
 
@@ -968,13 +968,13 @@
     @yield('content')
 
     <button id="chat-btn">
-        <img src="{{ asset('images/bmwchtbt.png') }}" alt="BMW Chat">
+        <img src="{{ asset('images/epsilon_logo.png') }}" alt="BMW Chat">
     </button>
 
     <div id="chat-popup">
         <div class="chat-header">
             <div class="chat-header-avatar">
-                <img src="{{ asset('images/bmwchtbt.png') }}" alt="">
+                <img src="{{ asset('images/epsilon_logo.png') }}" alt="">
             </div>
             <div class="chat-header-info">
                 <p class="name">EPSILON Assistant</p>
@@ -1003,7 +1003,7 @@
         <div class="footer-top">
             <div class="footer-brand">
                 <a class="navbar-brand" href="/">
-                    <img src="https://www.bmw.co.id/content/dam/bmw/common/images/logo-icons/BMW/BMW_White_Logo.svg.asset.1670245093434.svg"
+                    <img src="{{ asset('images/epsilon_logo.png') }}"
                         alt="BMW" width="50" height="50">
                 </a>
                 <p>The Ultimate<br>Driving Machine</p>
@@ -1045,7 +1045,7 @@
         </div>
 
         <div class="footer-bottom">
-            <p>© 2026 BMW AG. All rights reserved.</p>
+            <p>© 2026 EPSILON AG. All rights reserved.</p>
             <div class="footer-links">
                 <a href="#">Privacy Policy</a>
                 <span>|</span>
@@ -1112,7 +1112,7 @@
             row.className = 'msg-row';
             const formatted = text.replace(/\n/g, '<br>');
             row.innerHTML = `
-                <div class="bot-avatar"><img src="{{ asset('images/bmwchtbt.png') }}" alt=""></div>
+                <div class="bot-avatar"><img src="{{ asset('images/epsilon_logo.png') }}" alt=""></div>
                 <div class="bubble bot">${text}</div>`;
             box.appendChild(row);
             box.scrollTop = box.scrollHeight;
@@ -1124,7 +1124,7 @@
             row.className = 'msg-row';
             row.id = 'typing-row';
             row.innerHTML = `
-                <div class="bot-avatar"><img src="{{ asset('images/bmwchtbt.png') }}" alt=""></div>
+                <div class="bot-avatar"><img src="{{ asset('images/epsilon_logo.png') }}" alt=""></div>
                 <div class="bubble bot"><div class="typing-dots"><span></span><span></span><span></span></div></div>`;
             box.appendChild(row);
             box.scrollTop = box.scrollHeight;
