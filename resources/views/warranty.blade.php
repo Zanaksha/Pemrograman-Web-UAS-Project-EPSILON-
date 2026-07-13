@@ -9,7 +9,7 @@ body{font-family:sans-serif;font-size:14px}
 .nav-dark{background:#111}
 .nav-dark .nav-link{color:rgba(255,255,255,.8)!important;font-size:.8rem;text-transform:uppercase;letter-spacing:.05em}
 .hero{background:#111;min-height:280px;position:relative;overflow:hidden}
-.hero img{position:absolute;right:0;top:0;height:100%;width:60%;object-fit:cover;opacity:.5}
+.hero img{position:absolute;right:0;top:0;height:100%;width:100%;object-fit:cover;opacity:.5}
 .hero-text{position:relative;z-index:2;padding:3rem}
 .hero-text h1{font-size:3rem;font-weight:800;color:#fff}
 .hero-text p{color:rgba(255,255,255,.7);max-width:380px}
@@ -40,7 +40,7 @@ body{font-family:sans-serif;font-size:14px}
 
 <!-- HERO -->
 <section class="hero">
-  <img src="" alt="BMW"/>
+  <img src="{{ asset('images/car1.jpeg') }}" alt=""/>
   <div class="hero-text">
     <h1 style="margin-top:200px">Warranty</h1>
     <p>Drive with confidence. Our warranty coverage is designed to protect your EPSILON and your peace of mind.</p>
