@@ -25,7 +25,7 @@
     <div class="search-field-wrap">
       <i class="search-icon">&#128269;</i>
       <input type="text" id="csSearchInput" placeholder="Cari bantuan, layanan, atau pertanyaan..." autocomplete="off">
-      <button class="search-clear" id="searchClear" aria-label="Hapus">&#x2715;</button>
+      <button class="search-clear" id="csSearchClear" aria-label="Hapus">&#x2715;</button>
     </div>
     <div class="search-suggestions" id="searchSuggestions"></div>
   </div>

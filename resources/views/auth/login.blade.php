@@ -98,7 +98,7 @@
                 <div class="overlay"></div>
                 <div class="left-text">
                     <h1>BMW Experience</h1>
-                    <p>Discover luxury, performance, and innovation with BMW future mobility.</p>
+                    <p>Discover luxury, performance, and innovation with EPSILON future mobility.</p>
                 </div>
             </div>
 
@@ -106,7 +106,7 @@
             <div class="col-md-5 right-side">
                 <div class="login-box">
                     <div class="login-title">Login</div>
-                    <div class="login-subtitle">Welcome back to BMW</div>
+                    <div class="login-subtitle">Welcome back to EPSILON</div>
 
                     <form method="POST" action="{{ route('login') }}">
                         @csrf

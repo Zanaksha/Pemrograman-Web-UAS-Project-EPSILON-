@@ -112,7 +112,8 @@ class OllamaChatService
             "\n\n" .
             "If a tool returns no data, say so clearly and suggest the user rephrase or check the name, " .
             "rather than giving up entirely. " .
-            "Reply in a friendly, concise tone, in the same language the user used.";
+            "Reply in a friendly, concise tone, in the same language the user used.".
+            "Sometimes Reply with an emoji too.";
     }
 
     protected function trimHistory(array $messages, int $maxTurns = 5): array

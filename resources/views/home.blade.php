@@ -715,7 +715,7 @@
                 src="https://img.icons8.com/carbon-copy/100/garage.png" alt="garage" /></div>
             <h3>Find A Dealer</h3>
             <p>Find your nearest EPSILON dealer and experience premium service firsthand.</p>
-            <a href="#">Find now</a>
+            <a href="/finddealer">Find now</a>
           </div>
         </div>
         <div class="col-md-6 col-lg-3">
@@ -724,7 +724,7 @@
                 alt="car--v1" /></div>
             <h3>Shop new vehicles</h3>
             <p>Explore luxury, innovation, and performance in every EPSILON.</p>
-            <a href="#">Browse Shop</a>
+            <a href="/buycar">Browse Shop</a>
           </div>
         </div>
         <div class="col-md-6 col-lg-3">
@@ -733,7 +733,7 @@
                 alt="headset--v1" /></div>
             <h3>Customer Supports</h3>
             <p>We're here to assist you every step of the way.</p>
-            <a href="#">Ask now</a>
+            <a href="/customer">Ask now</a>
           </div>
         </div>
         <div class="col-md-6 col-lg-3">
@@ -742,7 +742,7 @@
                 src="https://img.icons8.com/parakeet-line/48/certificate.png" alt="certificate" /></div>
             <h3>Warranties</h3>
             <p>Drive with confidence backed by comprehensive EPSILON protection.</p>
-            <a href="#">Learn more</a>
+            <a href="/warranty">Learn more</a>
           </div>
         </div>
       </div>

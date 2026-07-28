@@ -843,8 +843,7 @@
         <div class="container-fluid">
 
             <a class="navbar-brand" href="/">
-                <img src="{{ asset('images/epsilon_logo.png') }}"
-                    alt="BMW" width="50" height="50">
+                <img src="{{ asset('images/epsilon_logo.png') }}" alt="BMW" width="50" height="50">
             </a>
 
             <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse"
@@ -950,6 +949,12 @@
                                 @endif
                             </a>
 
+                            @if (Auth::user()->role === 'admin')
+                                <a href="/admin" class="dropdown-item menu-item">
+                                    <span>Dashboard Admin</span>
+                                </a>
+                            @endif
+
                             <form method="POST" action="{{ route('logout') }}">
                                 @csrf
                                 <button type="submit" class="dropdown-item menu-item text-danger">
@@ -1003,8 +1008,7 @@
         <div class="footer-top">
             <div class="footer-brand">
                 <a class="navbar-brand" href="/">
-                    <img src="{{ asset('images/epsilon_logo.png') }}"
-                        alt="BMW" width="50" height="50">
+                    <img src="{{ asset('images/epsilon_logo.png') }}" alt="BMW" width="50" height="50">
                 </a>
                 <p>The Ultimate<br>Driving Machine</p>
             </div>
